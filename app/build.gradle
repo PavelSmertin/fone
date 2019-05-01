@@ -1,0 +1,138 @@
+def versionMajor = 0
+def versionMinor = 10
+def versionPatch = 10
+def versionBuild = 1
+
+
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.fone.android"
+        minSdkVersion 23
+        targetSdkVersion 28
+        versionCode versionMajor * 1000000 + versionMinor * 10000 + versionPatch * 100 + versionBuild
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}"
+        multiDexEnabled true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
+        packagingOptions {
+            exclude 'kotlin/**'
+            exclude '**/*.kotlin_metadata'
+            exclude 'META-INF/*.kotlin_module'
+            exclude 'META-INF/*.version'
+        }
+
+        kotlinOptions {
+            jvmTarget = '1.8'
+        }
+        vectorDrawables.useSupportLibrary = true
+
+    }
+
+
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlin_version}"
+    implementation "androidx.appcompat:appcompat:${supportLibVersion}"
+    implementation "androidx.constraintlayout:constraintlayout:${constraintLayoutVersion}"
+    implementation "androidx.recyclerview:recyclerview:${supportLibVersion}"
+    implementation "androidx.core:core-ktx:${ktxVersion}"
+
+    // DI
+    implementation "com.google.dagger:dagger:${daggerVersion}"
+    implementation "com.google.dagger:dagger-android:${daggerVersion}"
+    implementation "com.google.dagger:dagger-android-support:${daggerVersion}"
+    kapt "com.google.dagger:dagger-compiler:${daggerVersion}"
+    kapt "com.google.dagger:dagger-android-processor:${daggerVersion}"
+    kapt "com.squareup.inject:assisted-inject-processor-dagger2:${assistedinjectVersion}"
+    compileOnly "com.squareup.inject:assisted-inject-annotations-dagger2:${assistedinjectVersion}"
+
+    // RxJava
+    implementation "io.reactivex.rxjava2:rxjava:${rxJavaVersion}"
+    implementation "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}"
+    implementation "com.uber.autodispose:autodispose-ktx:${autodisposeVersion}"
+    implementation "com.uber.autodispose:autodispose-android-archcomponents-ktx:${autodisposeVersion}"
+    implementation "com.tbruyelle.rxpermissions2:rxpermissions:${rxpermissionsVersion}"
+
+    // retrofit
+    implementation "com.github.seniorzhai.okhttp:okhttp:${okhttpVersion}"
+    implementation("com.squareup.retrofit2:retrofit:${retrofitVersion}") {
+        exclude group: 'com.squareup.okhttp3', module: 'okhttp'
+    }
+    implementation("com.squareup.retrofit2:converter-gson:${retrofitVersion}") {
+        exclude group: 'com.squareup.okhttp3', module: 'okhttp'
+    }
+    implementation("com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}") {
+        exclude group: 'com.squareup.okhttp3', module: 'okhttp'
+    }
+    implementation("com.squareup.okhttp3:logging-interceptor:${okhttpVersion}") {
+        exclude group: 'com.squareup.okhttp3', module: 'okhttp'
+    }
+    implementation "com.jakewharton.rxbinding3:rxbinding:${rxbindingVersion}"
+    implementation("com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:${coroutineAdapterVersion}") {
+        exclude group: 'com.squareup.okhttp3', module: 'okhttp'
+    }
+
+    // Architecture components
+    implementation "androidx.paging:paging-runtime:${pagingVersion}"
+    implementation "androidx.lifecycle:lifecycle-extensions:${lifecycleVersion}"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${lifecycleVersion}"
+    kapt "androidx.lifecycle:lifecycle-compiler:${lifecycleVersion}"
+
+
+    implementation "androidx.room:room-runtime:${roomVersion}"
+    kapt "androidx.room:room-compiler:${roomVersion}"
+    implementation "androidx.room:room-rxjava2:${roomVersion}"
+    implementation "androidx.room:room-ktx:${roomVersion}"
+    implementation "androidx.navigation:navigation-fragment-ktx:${navigationVersion}"
+    implementation "androidx.navigation:navigation-ui-ktx:${navigationVersion}"
+
+    implementation "org.jetbrains.anko:anko-commons:$anko_version"
+    implementation "org.jetbrains.anko:anko-sdk25:$anko_version"
+    implementation "org.jetbrains.anko:anko-appcompat-v7:$anko_version"
+
+    implementation "com.google.code.gson:gson:${gsonVersion}"
+    implementation "com.jakewharton.threetenabp:threetenabp:${threetenabpVersion}"
+    implementation "com.jakewharton.timber:timber:${timberVersion}"
+    implementation "com.timehop.stickyheadersrecyclerview:library:${stickyheadersrecyclerviewVersion}"
+
+    implementation "com.github.bumptech.glide:glide:$glideVersion"
+    implementation("com.github.bumptech.glide:okhttp3-integration:$glideVersion") {
+        exclude group: 'com.squareup.okhttp3', module: 'okhttp'
+    }
+    kapt "com.github.bumptech.glide:compiler:$glideVersion"
+    implementation "jp.wasabeef:glide-transformations:${glideTransformationsVersion}"
+    implementation("io.jsonwebtoken:jjwt:${jwtVersion}")
+
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.1.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
+}
+
+androidExtensions {
+    experimental = true
+}

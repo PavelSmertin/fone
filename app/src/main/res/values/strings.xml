@@ -1,0 +1,91 @@
+<resources>
+    <string name="app_name">Fone</string>
+
+    <!--common-->
+    <string name="cancel">Cancel</string>
+    <string name="unread">%1$d new messages</string>
+    <string name="slide_to_cancel">Slide to Cancel</string>
+
+    <string name="state_connecting">Connecting</string>
+    <string name="state_syncing">Syncing messages</string>
+    <string name="state_calling">Tap to return to call</string>
+
+    <string name="empty_info">You can chat with contacts who have\nMixin install on their phone</string>
+    <string name="empty_start">Start Messaging</string>
+
+    <string name="group_wait">Please wait a moment</string>
+    <string name="group_role">You\' re now an admin</string>
+
+    <string name="conversation_pin">Pin to top</string>
+    <string name="conversation_delete">Delete</string>
+    <string name="conversation_pin_clear">Clear Pin</string>
+    <string name="conversation_status_pic">Photo</string>
+    <string name="conversation_status_video">Video</string>
+    <string name="conversation_status_file">File</string>
+    <string name="conversation_status_audio">Audio</string>
+    <string name="conversation_status_voice">Voice call</string>
+    <string name="conversation_status_unknown">Unknown</string>
+    <string name="conversation_status_transfer">Transfer</string>
+    <string name="conversation_status_sticker">Sticker</string>
+    <string name="conversation_waiting">Waiting for this message.</string>
+    <!--contact-->
+    <string name="contact_less_title">Contact</string>
+
+    <string name="chat_group_create">%1$s created group \"%2$s\"</string>
+    <string name="chat_group_add">%1$s added %2$s</string>
+    <string name="chat_group_remove">%1$s removed %2$s</string>
+    <string name="chat_group_exit">%1$s left</string>
+    <string name="chat_group_join">%1$s joined using this group\'s invite link</string>
+    <string name="chat_you_start">You</string>
+    <string name="chat_you">you</string>
+    <string name="chat_call_warning_voice">Can\'t record voice messages during a Mixin call.</string>
+
+
+    <string name="week_monday">Monday</string>
+    <string name="week_tuesday">Tuesday</string>
+    <string name="week_wednesday">Wednesday</string>
+    <string name="week_thursday">Thursday</string>
+    <string name="week_friday">Friday</string>
+    <string name="week_saturday">Saturday</string>
+    <string name="week_sunday">Sunday</string>
+    <string name="yesterday">Yesterday</string>
+    <string name="today">Today</string>
+
+    <!--sticker-->
+    <string name="sticker_manager">Manager Sticker</string>
+    <string name="sticker_add">Add Sticker</string>
+    <string name="sticker_add_failed">Add sticker failed</string>
+    <string name="sticker_add_invalid_size">Requires stickers file size larger than 1KB and less than 800KB, width and height between 64px and 512px.</string>
+    <string name="sticker_add_invalid_format">Invalid sticker format</string>
+    <string name="sticker_search_giphy">Search GIPHY</string>
+    <string name="sticker_no_result">No result</string>
+
+    <string name="gallery_empty_text">No media yet</string>
+    <string name="gallery_all">All Media</string>
+
+    <string name="copy_success">Copy to clipboard</string>
+    <string name="title_participants">%1$d participants</string>
+    <string name="send">Send</string>
+    <string name="send_file">Send \"%1$s\" to %2$s?</string>
+    <string name="send_file_group">Send \"%1$s\" to \"%2$s\"?</string>
+
+    <!--error-->
+    <string name="error_unknown_with_code">Error: %1$d</string>
+    <string name="error_server_5xx">Server is under maintenance</string>
+    <string name="error_too_many_request">ERROR %1$d: Rate limit exceeded</string>
+    <string name="error_not_found">ERROR %1$d: Not found</string>
+    <string name="error_forbidden">Access denied</string>
+    <string name="error_authentication">ERROR %1$d: Sign in to continue</string>
+    <string name="error_no_connection">No network connection</string>
+    <string name="error_connection_timeout">Network connection timeout</string>
+    <string name="error_network">Network error</string>
+    <string name="error_unknown">Error</string>
+    <string name="error_image">File error</string>
+    <string name="error_format">Format not supported</string>
+    <string name="error_file_exists">File does not exist</string>
+    <string name="error_unable_to_open_media">Can\'t find an app able to open this media.</string>
+    <string name="error_no_camera">No camera</string>
+    <string name="error_permission">Please open the necessary permissions</string>
+
+
+</resources>

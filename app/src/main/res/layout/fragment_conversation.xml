@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.fone.android.widget.keyboard.InputAwareLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/input_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <FrameLayout
+            android:id="@+id/bar_fl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.fone.android.widget.TitleView
+                android:id="@+id/action_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <com.fone.android.widget.ToolView
+                android:id="@+id/tool_view"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                android:visibility="gone"/>
+        </FrameLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/root_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/bar_fl">
+
+            <include
+                layout="@layout/view_link_state"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints"/>
+
+            <com.fone.android.widget.DraggableRecyclerView
+                android:id="@+id/chat_rv"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:paddingBottom="6dp"
+                app:stackFromEnd="true"
+                app:over_direction="-1"
+                app:layout_constraintBottom_toTopOf="@id/chat_control"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/state_layout"
+                tools:listitem="@layout/item_chat_message"/>
+
+
+            <LinearLayout
+                android:id="@+id/bg_quick_flag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:orientation="vertical"
+                android:padding="8dp"
+                android:translationY="130dp"
+                app:layout_constraintBottom_toBottomOf="@id/chat_rv"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <FrameLayout
+                    android:id="@+id/group_flag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clipChildren="false"
+                    android:clipToPadding="false"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        android:background="@drawable/bg_quick_flag"
+                        android:padding="6dp"
+                        android:src="@drawable/ic_volume_up"
+                        android:translationZ="1dp"
+                        tools:ignore="ContentDescription"/>
+
+                    <View
+                        android:layout_width="8dp"
+                        android:layout_height="8dp"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginTop="2dp"
+                        android:background="@drawable/bg_dot_red"
+                        android:translationZ="1dp"/>
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clipChildren="false"
+                    android:clipToPadding="false">
+
+                    <ImageView
+                        android:id="@+id/down_flag"
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/bg_quick_flag"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_scroll_down"
+                        android:translationZ="1dp"
+                        android:visibility="visible"
+                        tools:ignore="ContentDescription"/>
+
+                    <TextView
+                        android:id="@+id/down_unread"
+                        android:visibility="gone"
+                        android:layout_gravity="center_horizontal"
+                        android:textColor="@color/white"
+                        android:background="@drawable/bg_unread_small"
+                        android:textSize="12sp"
+                        android:fontFamily="monospace"
+                        android:layout_width="wrap_content"
+                        android:translationZ="1dp"
+                        android:layout_height="wrap_content"/>
+
+                </FrameLayout>
+
+            </LinearLayout>
+
+            <com.fone.android.widget.ReplyView
+                android:id="@+id/reply_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@id/chat_control"
+                tools:ignore="MissingConstraints"/>
+
+            <FrameLayout
+                android:id="@+id/bottom_layout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/chat_control_height"
+                android:background="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/chat_rv">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_gravity="top"
+                    android:background="@color/divider"/>
+
+                <TextView
+                    android:id="@+id/bottom_cant_send"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:paddingEnd="16dp"
+                    android:paddingStart="16dp"
+                    android:text="@string/group_cant_send"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:id="@+id/bottom_unblock"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:paddingEnd="16dp"
+                    android:paddingStart="16dp"
+                    android:text="@string/setting_unblock"
+                    android:textColor="@color/colorBlue"
+                    android:textSize="16sp"
+                    android:visibility="gone"/>
+            </FrameLayout>
+
+            <com.fone.android.widget.ChatControlView
+                android:id="@+id/chat_control"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/chat_rv"/>
+
+            <com.fone.android.widget.RecordCircleView
+                    android:id="@+id/record_circle"
+                    android:layout_width="124dp"
+                    android:layout_height="194dp"
+                    android:visibility="gone"
+                    android:translationX="36dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                android:id="@+id/record_tip_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="44dp"
+                android:visibility="invisible"
+                android:background="@drawable/bg_record_tip"
+                android:text="@string/hold_to_record_audio"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
+
+    <com.fone.android.widget.InputAwareFrameLayout
+        android:id="@+id/sticker_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/chat_control"/>
+
+    <com.fone.android.widget.InputAwareFrameLayout
+        android:id="@+id/menu_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/chat_control"/>
+
+    <com.fone.android.widget.InputAwareFrameLayout
+        android:id="@+id/gallery_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/chat_control"/>
+</com.fone.android.widget.keyboard.InputAwareLayout>

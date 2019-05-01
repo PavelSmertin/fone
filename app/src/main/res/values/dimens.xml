@@ -1,0 +1,25 @@
+<resources>
+
+    <dimen name="padding8">8dp</dimen>
+
+    <dimen name="margin12">12dp</dimen>
+    <dimen name="margin16">16dp</dimen>
+    <dimen name="margin20">20dp</dimen>
+
+    <dimen name="blink_size">8dp</dimen>
+
+    <string name="group_cant_send">You can\'t send messages to this group because you\'re no longer a participant.</string>
+    <string name="setting_unblock">Unblock</string>
+    <string name="hold_to_record_audio">Hold to record, release to send</string>
+
+    <dimen name="min_keyboard_size">50dp</dimen>
+    <dimen name="min_custom_keyboard_size">110dp</dimen>
+    <dimen name="default_custom_keyboard_size">220dp</dimen>
+    <dimen name="min_custom_keyboard_top_margin">170dp</dimen>
+
+    <dimen name="chat_control_height">52dp</dimen>
+    <dimen name="chat_date_size">10sp</dimen>
+    <dimen name="avatar_text_size">22sp</dimen>
+
+
+</resources>
