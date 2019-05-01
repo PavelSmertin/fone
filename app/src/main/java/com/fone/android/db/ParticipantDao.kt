@@ -8,7 +8,6 @@ import androidx.room.Transaction
 import com.fone.android.vo.Participant
 import com.fone.android.vo.User
 
-
 @Dao
 interface ParticipantDao : BaseDao<Participant> {
 
@@ -39,7 +38,7 @@ interface ParticipantDao : BaseDao<Participant> {
 
     @Transaction
     @Query("SELECT p.* FROM participants p LEFT JOIN users u ON p.user_id = u.user_id WHERE p.conversation_id = :conversationId AND u.app_id IS NULL AND " +
-        "p.user_id != :accountId")
+        "p.user_id NOT IN (SELECT user_id FROM sent_sender_keys WHERE conversation_id= :conversationId) AND p.user_id != :accountId")
     fun getNotSentKeyParticipants(conversationId: String, accountId: String): List<Participant>?
 
     @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)

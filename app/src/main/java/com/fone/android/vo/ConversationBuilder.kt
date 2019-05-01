@@ -1,6 +1,5 @@
 package com.fone.android.vo
 
-
 class ConversationBuilder(val conversationId: String, val createdAt: String, val status: Int) {
     private var ownerId: String? = null
     private var category: String? = null

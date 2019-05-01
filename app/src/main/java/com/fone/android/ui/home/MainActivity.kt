@@ -4,15 +4,22 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import com.fone.android.Constants
+import com.fone.android.FoneApplication
 import com.fone.android.R
 import com.fone.android.db.ConversationDao
 import com.fone.android.db.UserDao
 import com.fone.android.di.type.DatabaseCategory
 import com.fone.android.di.type.DatabaseCategoryEnum
+import com.fone.android.extension.defaultSharedPreferences
 import com.fone.android.ui.common.BlazeBaseActivity
 import com.fone.android.ui.common.NavigationController
 import com.fone.android.ui.conversation.ConversationActivity
+import com.fone.android.ui.landing.InitializeActivity
+import com.fone.android.ui.landing.LandingActivity
+import com.fone.android.ui.landing.LoadingFragment
 import com.fone.android.util.ErrorHandler
+import com.fone.android.util.Session
 import com.fone.android.vo.isGroup
 import com.uber.autodispose.autoDisposable
 import io.reactivex.Maybe
@@ -39,6 +46,23 @@ class MainActivity : BlazeBaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        if (!Session.checkToken()) run {
+            startActivity(Intent(this, LandingActivity::class.java))
+            finish()
+            return
+        }
+
+        if (defaultSharedPreferences.getBoolean(Constants.Account.PREF_SET_NAME, false)) {
+            InitializeActivity.showSetupName(this)
+        }
+
+        FoneApplication.get().onlining.set(true)
+        if (!defaultSharedPreferences.getBoolean(LoadingFragment.IS_LOADED, false)) {
+            InitializeActivity.showLoading(this)
+            finish()
+            return
+        }
 
         setContentView(R.layout.activity_main)
 

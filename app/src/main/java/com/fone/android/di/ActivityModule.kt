@@ -1,8 +1,12 @@
 package com.fone.android.di
 
 
+import com.fone.android.di.module.InitializeActivityModule
+import com.fone.android.di.module.LandingActivityModule
 import com.fone.android.ui.conversation.ConversationActivity
 import com.fone.android.ui.home.MainActivity
+import com.fone.android.ui.landing.InitializeActivity
+import com.fone.android.ui.landing.LandingActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import one.mixin.android.di.module.CommonModule
@@ -18,4 +22,9 @@ abstract class ActivityModule {
     @ContributesAndroidInjector(modules = [(CommonModule::class), (ConversationActivityModule::class)])
     internal abstract fun contributeConversation(): ConversationActivity
 
+    @ContributesAndroidInjector(modules = [(LandingActivityModule::class)])
+    internal abstract fun contributeLanding(): LandingActivity
+
+    @ContributesAndroidInjector(modules = [(InitializeActivityModule::class)])
+    internal abstract fun contributeSetupName(): InitializeActivity
 }

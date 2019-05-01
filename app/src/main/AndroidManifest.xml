@@ -20,6 +20,17 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity
+                android:name=".ui.landing.LandingActivity"
+                android:launchMode="singleTop"
+                android:screenOrientation="portrait"
+                android:theme="@style/AppTheme.NoAnim"
+                android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+                android:name=".ui.landing.InitializeActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/AppTheme.NoActionBar"
+                android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
 
         <activity
 

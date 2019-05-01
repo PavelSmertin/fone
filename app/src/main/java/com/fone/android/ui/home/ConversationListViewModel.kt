@@ -44,7 +44,7 @@ internal constructor(
             0,
             ConversationStatus.SUCCESS.ordinal,
             null)
-        //messageRepository.insertConversation(conversation, mutableListOf<Participant>())
+        messageRepository.insertConversation(conversation, mutableListOf<Participant>())
 
         val c = messageRepository.getConversation(conversationId)
         c?.let {

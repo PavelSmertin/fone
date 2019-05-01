@@ -21,5 +21,7 @@
     <dimen name="chat_date_size">10sp</dimen>
     <dimen name="avatar_text_size">22sp</dimen>
 
+    <dimen name="btn_min_height">48dp</dimen>
+
 
 </resources>

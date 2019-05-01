@@ -33,6 +33,7 @@ buildscript {
         ext.glideTransformationsVersion = '3.2.0'
         ext.stickyheadersrecyclerviewVersion = '0.4.3@aar'
         ext.jwtVersion = '0.9.1'
+        ext.fabprogresscircleVersion = '1.01@aar'
 
         ext.pagingVersion = '2.1.0'
 

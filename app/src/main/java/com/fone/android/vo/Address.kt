@@ -1,0 +1,45 @@
+package com.fone.android.vo
+
+import android.annotation.SuppressLint
+import android.os.Parcelable
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
+
+@SuppressLint("ParcelCreator")
+@Parcelize
+@Entity(tableName = "addresses")
+data class Address(
+    @PrimaryKey
+    @ColumnInfo(name = "address_id")
+    @SerializedName("address_id")
+    val addressId: String,
+    @ColumnInfo(name = "type")
+    val type: String,
+    @ColumnInfo(name = "asset_id")
+    @SerializedName("asset_id")
+    val assetId: String,
+    @ColumnInfo(name = "public_key")
+    @SerializedName("public_key")
+    val publicKey: String?,
+    @ColumnInfo(name = "label")
+    val label: String?,
+    @ColumnInfo(name = "updated_at")
+    @SerializedName("updated_at")
+    val updatedAt: String,
+    @ColumnInfo(name = "reserve")
+    val reserve: String,
+    @ColumnInfo(name = "fee")
+    val fee: String,
+    @ColumnInfo(name = "account_name")
+    @SerializedName("account_name")
+    val accountName: String?,
+    @ColumnInfo(name = "account_tag")
+    @SerializedName("account_tag")
+    val accountTag: String?,
+    @ColumnInfo(name = "dust")
+    @SerializedName("dust")
+    val dust: String?
+) : Parcelable

@@ -10,9 +10,9 @@ data class ConversationItem(
     val groupIconUrl: String?,
     val category: String?,
     val groupName: String?,
-    val name: String?,
+    val name: String,
     val ownerId: String,
-    val ownerIdentityNumber: String?,
+    val ownerIdentityNumber: String,
     val status: Int,
     val lastReadMessageId: String?,
     val unseenMessageCount: Int?,
@@ -37,7 +37,7 @@ data class ConversationItem(
 
     fun isContact() = category == ConversationCategory.CONTACT.name
 
-    fun getConversationName(): String? {
+    fun getConversationName(): String {
         return when {
             isContact() -> name
             isGroup() -> groupName!!
