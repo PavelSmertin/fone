@@ -5,20 +5,26 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.*
+import android.view.View.GONE
+import android.view.View.INVISIBLE
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import com.fone.android.Constants
 import com.fone.android.Constants.KEYS
+import com.fone.android.FoneApplication
 import com.fone.android.R
-import com.fone.android.api.FoneResponse
+import com.fone.android.extension.defaultSharedPreferences
+import com.fone.android.extension.nowInUtc
+import com.fone.android.extension.putBoolean
 import com.fone.android.extension.vibrate
 import com.fone.android.ui.common.BaseFragment
 import com.fone.android.ui.landing.LandingActivity.Companion.ARGS_PIN
 import com.fone.android.ui.landing.MobileFragment.Companion.ARGS_PHONE_NUM
-import com.fone.android.util.ErrorHandler
+import com.fone.android.util.Session
 import com.fone.android.vo.Account
+import com.fone.android.vo.toUser
 import com.fone.android.widget.Keyboard
 import com.fone.android.widget.VerificationCodeView
 import kotlinx.android.synthetic.main.fragment_verification.*
@@ -44,8 +50,7 @@ class VerificationFragment : BaseFragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-//    @Inject
-//    lateinit var jobManager: MixinJobManager
+
     private val mobileViewModel: MobileViewModel by lazy {
         ViewModelProviders.of(this, viewModelFactory).get(MobileViewModel::class.java)
     }
@@ -73,7 +78,7 @@ class VerificationFragment : BaseFragment() {
         verification_keyboard.setKeyboardKeys(KEYS)
         verification_keyboard.setOnClickKeyboardListener(mKeyboardListener)
         verification_cover.isClickable = true
-        verification_next_fab.setOnClickListener { handlePinVerification() }
+        verification_next_fab.setOnClickListener { handleLogin() }
 
         startCountDown()
     }
@@ -83,154 +88,49 @@ class VerificationFragment : BaseFragment() {
         mCountDownTimer?.cancel()
     }
 
-    override fun onBackPressed(): Boolean {
-        return false
-    }
-
-    private fun handlePinVerification() {
-        if (pin == null) {
-            handleLogin()
-        } else {
-            handlePhoneModification()
-        }
-    }
-
-    private fun handlePhoneModification() {
-        showLoading()
-//        mobileViewModel.changePhone(arguments!!.getString(ARGS_ID)!!, pin_verification_view.code(), pin = pin!!)
-//            .autoDisposable(scopeProvider).subscribe({ r: FoneResponse<Account> ->
-//                verification_next_fab.hide()
-//                verification_cover.visibility = GONE
-//                if (!r.isSuccess) {
-//                    handleFailure(r)
-//                    return@subscribe
-//                }
-//                doAsync {
-//                    val a = Session.getAccount()
-//                    a?.let {
-//                        val phone = arguments!!.getString(ARGS_PHONE_NUM) ?: return@doAsync
-//                        mobileViewModel.updatePhone(a.userId, phone)
-//                        a.phone = phone
-//                        Session.storeAccount(a)
-//                    }
-//                    uiThread {
-//                        alert(getString(R.string.change_phone_success)) {
-//                            yesButton { dialog ->
-//                                dialog.dismiss()
-//                                activity?.finish()
-//                            }
-//                        }.show()
-//                    }
-//                }
-//            }, { t: Throwable ->
-//                handleError(t)
-//            })
-    }
-
     @SuppressLint("CheckResult")
     private fun handleLogin() {
-        showLoading()
-
-//        val registrationId = CryptoPreference.getLocalRegistrationId(context!!)
-//        val sessionKey = generateRSAKeyPair()
-//        val sessionSecret = Base64.encodeBytes(sessionKey.getPublicKey())
-//        val accountRequest = AccountRequest(pin_verification_view.code(),
-//            registration_id = registrationId,
-//            purpose = VerificationPurpose.SESSION.name,
-//            pin = pin,
-//            session_secret = sessionSecret)
-//        mobileViewModel.create(arguments!!.getString(ARGS_ID)!!, accountRequest)
-//            .autoDisposable(scopeProvider).subscribe({ r: FoneResponse<Account> ->
-//                if (!isAdded) {
-//                    return@subscribe
-//                }
-//                verification_next_fab.hide()
-//                verification_cover.visibility = GONE
-//                if (!r.isSuccess) {
-//                    handleFailure(r)
-//                    return@subscribe
-//                }
-//
-//                account = r.data!!
-//                if (account.code_id.isNotEmpty()) {
-//                    GlobalScope.launch(SINGLE_DB_THREAD) {
-//                        val p = Point()
-//                        val ctx = FoneApplication.appContext
-//                        ctx.windowManager.defaultDisplay?.getSize(p)
-//                        val size = minOf(p.x, p.y)
-//                        val b = account.code_url.generateQRCode(size)
-//                        b?.saveQRCode(ctx, account.userId)
-//                    }
-//                }
-//                Session.storeAccount(account)
-//                Session.storeToken(sessionKey.getPrivateKeyPem())
-//                val key = rsaDecrypt(sessionKey.private, account.session_id, account.pin_token)
-//                Session.storePinToken(key)
-//
-//                verification_keyboard.animate().translationY(300f).start()
-//                FoneApplication.get().onlining.set(true)
-//                if (account.full_name?.isBlank()!!) {
-//                    defaultSharedPreferences.putBoolean(Constants.Account.PREF_SET_NAME, true)
-//                    mobileViewModel.insertUser(r.data!!.toUser())
-//                    InitializeActivity.showSetupName(context!!)
-//                }
-//                activity?.finish()
-//            }, { t: Throwable ->
-//                handleError(t)
-//            })
-    }
-
-    private fun handleFailure(r: FoneResponse<Account>) {
-        pin_verification_view.error()
-        pin_verification_tip_tv.visibility = VISIBLE
-        pin_verification_tip_tv.text = getString(R.string.landing_validation_error)
-        if (r.errorCode == ErrorHandler.PHONE_VERIFICATION_CODE_INVALID ||
-            r.errorCode == ErrorHandler.PHONE_VERIFICATION_CODE_EXPIRED) {
-            verification_next_fab.visibility = View.INVISIBLE
-        }
-        ErrorHandler.handleMixinError(r.errorCode)
-    }
-
-
-    private fun handleError(t: Throwable) {
         verification_next_fab.hide()
         verification_cover.visibility = GONE
-        ErrorHandler.handleError(t)
+
+        var account = Account(
+            "1",
+            "1",
+            "default",
+            "0000-0000-0000-0000",
+            "-1",
+            "Твой батя",
+            "https://placeimg.com/140/140/any",
+            "123",
+            null,
+            "-1",
+            "0000",
+            0,
+            "-1",
+            "-1",
+            nowInUtc(),
+            "empty",
+            true,
+            "empty"
+        )
+
+        Session.storeAccount(account)
+        Session.storeToken("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI0NDc4MzIxODA1ODY2NzYyMjUiLCJleHAiOjE1NTc5NDc2MTd9.ROFRBEX9UID95-B8-uXTOAZIkr67Nhp9LeHOeHeLApE")
+        verification_keyboard.animate().translationY(300f).start()
+
+        FoneApplication.get().onlining.set(true)
+        //if (account.full_name?.isBlank()!!) {
+            defaultSharedPreferences.putBoolean(Constants.Account.PREF_SET_NAME, true)
+            mobileViewModel.insertUser(account.toUser())
+            mobileViewModel.initialConversation()
+            InitializeActivity.showLoading(context!!)
+        //}
+        activity?.finish()
     }
 
-    private fun showLoading() {
-        verification_next_fab.visibility = View.VISIBLE
-        verification_next_fab.show()
-        verification_cover.visibility = VISIBLE
-    }
-
-    private fun hideLoading() {
-        verification_next_fab.hide()
-        verification_next_fab.visibility = GONE
-        verification_cover.visibility = GONE
-    }
-
-    private fun sendVerification(gRecaptchaResponse: String? = null) {
-        showLoading()
-//        val verificationRequest = VerificationRequest(
-//            arguments!!.getString(ARGS_PHONE_NUM),
-//            null,
-//            if (pin == null) VerificationPurpose.SESSION.name else VerificationPurpose.PHONE.name,
-//            gRecaptchaResponse)
-//        mobileViewModel.verification(verificationRequest)
-//            .autoDisposable(scopeProvider).subscribe({ r: FoneApplication<VerificationResponse> ->
-//                if (!r.isSuccess) {
-//                    hideLoading()
-//                    ErrorHandler.handleMixinError(r.errorCode)
-//                } else {
-//                    hideLoading()
-//                    pin_verification_view?.clear()
-//                    startCountDown()
-//                }
-//            }, { t: Throwable ->
-//                handleError(t)
-//                verification_next_fab.visibility = GONE
-//            })
+    private fun sendVerification() {
+        pin_verification_view?.clear()
+        startCountDown()
     }
 
     private fun startCountDown() {
@@ -284,12 +184,9 @@ class VerificationFragment : BaseFragment() {
         override fun onCodeEntered(code: String) {
             pin_verification_tip_tv.visibility = INVISIBLE
             if (code.isEmpty() || code.length != pin_verification_view.count) {
-                if (isAdded) {
-                    hideLoading()
-                }
                 return
             }
-            handlePinVerification()
+            handleLogin()
         }
     }
 }

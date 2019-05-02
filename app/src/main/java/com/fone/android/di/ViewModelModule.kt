@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.fone.android.ui.conversation.ConversationViewModel
 import com.fone.android.ui.home.ConversationListViewModel
+import com.fone.android.ui.landing.MobileViewModel
 import com.fone.android.viewmodel.ViewModelFactory
 import dagger.Binds
 import dagger.Module
@@ -22,6 +23,12 @@ internal abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ConversationViewModel::class)
     internal abstract fun bindConversationViewModel(chatViewModel: ConversationViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MobileViewModel::class)
+    internal abstract fun bindMobileViewModel(mobileViewModel: MobileViewModel): ViewModel
+
 
     @Binds
     internal abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory

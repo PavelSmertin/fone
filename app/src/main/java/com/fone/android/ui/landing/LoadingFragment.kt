@@ -10,6 +10,7 @@ import com.fone.android.R
 import com.fone.android.extension.defaultSharedPreferences
 import com.fone.android.extension.putBoolean
 import com.fone.android.ui.common.BaseFragment
+import com.fone.android.ui.home.MainActivity
 import javax.inject.Inject
 
 class LoadingFragment : BaseFragment() {
@@ -35,6 +36,8 @@ class LoadingFragment : BaseFragment() {
     }
 
     private fun load() {
+        context!!.defaultSharedPreferences.putBoolean(IS_LOADED, true)
+        MainActivity.show(context!!)
         activity?.finish()
     }
 

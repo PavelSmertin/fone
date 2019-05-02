@@ -122,9 +122,9 @@ public class CircleImageView extends AppCompatImageView {
             return;
         }
 
-        canvas.drawCircle(mDrawableRect.centerX(), mDrawableRect.centerY(), mDrawableRadius, mBitmapPaint);
+        canvas.drawRect(mDrawableRect.centerX()-mDrawableRadius, mDrawableRect.centerY()-mDrawableRadius, mDrawableRect.centerX()+mDrawableRadius, mDrawableRect.centerY()+mDrawableRadius, mBitmapPaint);
         if (mBorderWidth > 0) {
-            canvas.drawCircle(mBorderRect.centerX(), mBorderRect.centerY(), mBorderRadius, mBorderPaint);
+            canvas.drawRect(mBorderRect.centerX()-mDrawableRadius, mBorderRect.centerY()-mDrawableRadius, mBorderRect.centerX()+mDrawableRadius, mBorderRect.centerY()+mDrawableRadius, mBitmapPaint);
         }
     }
 

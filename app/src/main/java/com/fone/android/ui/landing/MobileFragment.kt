@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import com.fone.android.R
+import com.fone.android.extension.addFragment
 import com.fone.android.ui.common.BaseFragment
 import com.fone.android.ui.landing.LandingActivity.Companion.ARGS_PIN
 import kotlinx.android.synthetic.main.fragment_mobile.*
@@ -48,7 +49,6 @@ class MobileFragment : BaseFragment() {
         if (pin != null) {
             mobile_title_tv.setText(R.string.landing_enter_new_mobile_number)
         }
-        back_iv.setOnClickListener { activity?.onBackPressed() }
         mobile_fab.setOnClickListener { showDialog() }
         mobile_cover.isClickable = true
 
@@ -78,6 +78,10 @@ class MobileFragment : BaseFragment() {
         if (!isAdded) return
         mobile_fab.show()
         mobile_cover.visibility = VISIBLE
+
+        activity?.addFragment(this@MobileFragment,
+            VerificationFragment.newInstance("-1", mobile_et.text.toString(), pin), VerificationFragment.TAG)
+
     }
 
 

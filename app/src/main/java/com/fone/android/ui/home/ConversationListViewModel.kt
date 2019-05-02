@@ -7,7 +7,6 @@ import com.fone.android.api.request.ParticipantRequest
 import com.fone.android.extension.nowInUtc
 import com.fone.android.repository.ConversationRepository
 import com.fone.android.vo.Conversation
-import com.fone.android.vo.ConversationCategory
 import com.fone.android.vo.ConversationStatus
 import com.fone.android.vo.Participant
 import javax.inject.Inject
@@ -24,28 +23,6 @@ internal constructor(
 //    }
 
     fun createGroupConversation(conversationId: String) {
-
-//        Session.storeAccount(data)
-//        mobileViewModel.insertUser(data.toUser())
-
-        var conversation = Conversation(
-            "1",
-            "1",
-            ConversationCategory.CONTACT.name,
-            "test",
-            null,
-            null,
-            null,
-            "",
-            nowInUtc(),
-            null,
-            null,
-            null,
-            0,
-            ConversationStatus.SUCCESS.ordinal,
-            null)
-        messageRepository.insertConversation(conversation, mutableListOf<Participant>())
-
         val c = messageRepository.getConversation(conversationId)
         c?.let {
             val participants = messageRepository.getGroupParticipants(conversationId)
