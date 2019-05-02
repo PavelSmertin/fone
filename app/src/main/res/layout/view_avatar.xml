@@ -12,7 +12,7 @@
         android:textColor="@android:color/white"
         android:textSize="@dimen/avatar_text_size" />
 
-    <com.fone.android.widget.CircleImageView
+    <ImageView
         android:id="@+id/avatar_simple"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

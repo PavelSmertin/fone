@@ -14,11 +14,13 @@
 
     <com.fone.android.widget.AvatarView
             android:id="@+id/avatar_iv"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_margin="@dimen/margin12"/>
+            android:layout_width="76dp"
+            android:layout_height="56dp"
+            android:layout_alignParentBottom="true"
+    />
 
     <LinearLayout
+            android:layout_marginStart="@dimen/margin12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@id/avatar_iv"
@@ -32,7 +34,7 @@
                 android:layout_marginBottom="2dp"
                 android:maxWidth="220dp"
                 android:singleLine="true"
-                android:textColor="@color/text_black"
+                android:textColor="@color/white"
                 android:textSize="16sp"/>
 
         <ImageView
@@ -85,6 +87,7 @@
             android:layout_toEndOf="@id/avatar_iv"
             android:layout_below="@id/center"
             android:layout_marginEnd="@dimen/margin12"
+            android:layout_marginStart="@dimen/margin12"
             android:layout_marginTop="2dp"
             android:orientation="horizontal">
 
@@ -157,8 +160,8 @@
 
     <View
             android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_marginStart="72dp"
+            android:layout_height="2dp"
+            android:layout_marginStart="76dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             android:background="@color/divider"/>

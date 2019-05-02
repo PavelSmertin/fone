@@ -1,20 +1,16 @@
 package com.fone.android.widget
 
+
 import android.content.Context
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.widget.ViewAnimator
-import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.fone.android.R
-import com.fone.android.extension.getColorCode
 import com.fone.android.extension.loadCircleImage
-import com.fone.android.extension.loadImage
 import kotlinx.android.synthetic.main.view_avatar.view.*
-
-
 import org.jetbrains.anko.sp
 
 class AvatarView(context: Context, attrs: AttributeSet?) : ViewAnimator(context, attrs) {
@@ -26,12 +22,12 @@ class AvatarView(context: Context, attrs: AttributeSet?) : ViewAnimator(context,
                 avatar_tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, ta.getDimension(R.styleable.CircleImageView_border_text_size,
                     sp(20f).toFloat()))
             }
-            if (ta.hasValue(R.styleable.CircleImageView_border_width)) {
-                avatar_simple.borderWidth = ta.getDimensionPixelSize(R.styleable.CircleImageView_border_width, 0)
-                avatar_simple.borderColor = ta.getColor(R.styleable.CircleImageView_border_color,
-                    ContextCompat.getColor(context, android.R.color.white))
-                avatar_tv.setBorderInfo(avatar_simple.borderWidth.toFloat(), avatar_simple.borderColor)
-            }
+//            if (ta.hasValue(R.styleable.CircleImageView_border_width)) {
+//                avatar_simple.borderWidth = ta.getDimensionPixelSize(R.styleable.CircleImageView_border_width, 0)
+//                avatar_simple.borderColor = ta.getColor(R.styleable.CircleImageView_border_color,
+//                    ContextCompat.getColor(context, android.R.color.white))
+//                avatar_tv.setBorderInfo(avatar_simple.borderWidth.toFloat(), avatar_simple.borderColor)
+//            }
 
             ta.recycle()
         }
@@ -68,7 +64,7 @@ class AvatarView(context: Context, attrs: AttributeSet?) : ViewAnimator(context,
         displayedChild = POS_AVATAR
         Glide.with(this)
             .load(url)
-            .apply(RequestOptions().dontAnimate().placeholder(R.drawable.ic_group_place_holder))
+            .apply(RequestOptions().centerCrop().dontAnimate().placeholder(R.drawable.ic_group_place_holder))
             .into(avatar_simple)
     }
 
@@ -78,13 +74,17 @@ class AvatarView(context: Context, attrs: AttributeSet?) : ViewAnimator(context,
     }
 
     fun setInfo(name: String?, url: String?, id: String) {
-        avatar_tv.text = checkEmoji(name)
-        try {
-            avatar_tv.setBackgroundResource(getAvatarPlaceHolderById(id.getColorCode(24) + 1))
-        } catch (e: NumberFormatException) {
-        }
+//        avatar_tv.text = checkEmoji(name)
+//        try {
+//            avatar_tv.setBackgroundResource(getAvatarPlaceHolderById(id.getColorCode(24) + 1))
+//        } catch (e: NumberFormatException) {
+//        }
         displayedChild = if (url != null && url.isNotEmpty()) {
-            avatar_simple.loadImage(url, R.drawable.ic_avatar_place_holder)
+            Glide.with(this)
+                .load(url)
+                .centerCrop()
+                .into(avatar_simple)
+
             POS_AVATAR
         } else {
             POS_TEXT
