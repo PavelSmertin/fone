@@ -11,6 +11,8 @@ import androidx.paging.PagedList
 import com.fone.android.Constants.PAGE_SIZE
 import com.fone.android.FoneApplication
 import com.fone.android.extension.nowInUtc
+import com.fone.android.job.FoneJobManager
+import com.fone.android.job.SendMessageJob
 import com.fone.android.repository.ConversationRepository
 import com.fone.android.repository.UserRepository
 import com.fone.android.vo.*
@@ -26,8 +28,10 @@ class ConversationViewModel
 @Inject
 internal constructor(
     private val conversationRepository: ConversationRepository,
-    private val userRepository: UserRepository
-) : ViewModel() {
+    private val userRepository: UserRepository,
+    private val jobManager: FoneJobManager
+
+    ) : ViewModel() {
 
     fun getMessages(id: String, initialLoadKey: Int = 0): LiveData<PagedList<MessageItem>> {
         return LivePagedListBuilder(conversationRepository.getMessages(id), PagedList.Config.Builder()
@@ -57,6 +61,8 @@ internal constructor(
         val category = if (isPlain) MessageCategory.PLAIN_TEXT.name else MessageCategory.SIGNAL_TEXT.name
         val message = createMessage(UUID.randomUUID().toString(), conversationId,
             sender.userId, category, content.trim(), nowInUtc(), MessageStatus.SENDING)
+        jobManager.addJobInBackground(SendMessageJob(message))
+
     }
 
     fun sendReplyMessage(conversationId: String, sender: User, content: String, replyMessage: MessageItem, isPlain: Boolean) {
@@ -65,6 +71,7 @@ internal constructor(
             sender.userId, category, content.trim(), nowInUtc(), MessageStatus.SENDING, replyMessage.messageId, Gson().toJson(
                 QuoteMessageItem(replyMessage)
             ))
+        jobManager.addJobInBackground(SendMessageJob(message))
     }
 
     fun sendFordMessage(conversationId: String, sender: User, id: String, isPlain: Boolean) =

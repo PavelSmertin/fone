@@ -178,8 +178,7 @@ class ConversationFragment : LinkFragment(), KeyboardAwareLinearLayout.OnKeyboar
                     chatAdapter.selectSet.isEmpty() -> tool_view.fadeOut()
                     chatAdapter.selectSet.size == 1 -> {
                         try {
-                            if (chatAdapter.selectSet.valueAt(0)?.type == MessageCategory.SIGNAL_TEXT.name ||
-                                chatAdapter.selectSet.valueAt(0)?.type == MessageCategory.PLAIN_TEXT.name) {
+                            if (chatAdapter.selectSet.valueAt(0)?.type == MessageCategory.PLAIN_TEXT.name) {
                                 tool_view.copy_iv.visibility = View.VISIBLE
                             } else {
                                 tool_view.copy_iv.visibility = View.GONE
@@ -216,8 +215,7 @@ class ConversationFragment : LinkFragment(), KeyboardAwareLinearLayout.OnKeyboar
             override fun onLongClick(messageItem: MessageItem, position: Int): Boolean {
                 val b = chatAdapter.addSelect(messageItem)
                 if (b) {
-                    if (messageItem.type == MessageCategory.SIGNAL_TEXT.name ||
-                        messageItem.type == MessageCategory.PLAIN_TEXT.name) {
+                    if (messageItem.type == MessageCategory.PLAIN_TEXT.name) {
                         tool_view.copy_iv.visibility = View.VISIBLE
                     } else {
                         tool_view.copy_iv.visibility = View.GONE

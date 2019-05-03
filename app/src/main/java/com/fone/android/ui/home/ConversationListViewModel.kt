@@ -14,7 +14,7 @@ import javax.inject.Inject
 class ConversationListViewModel @Inject
 internal constructor(
     private val messageRepository: ConversationRepository
-    //private val jobManager: MixinJobManager
+    //private val jobManager: FoneJobManager
 ) : ViewModel() {
     var conversations = messageRepository.conversation()
 

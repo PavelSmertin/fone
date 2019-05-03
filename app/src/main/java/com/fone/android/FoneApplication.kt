@@ -35,7 +35,7 @@ class FoneApplication : Application(), HasActivityInjector, HasServiceInjector {
 //    lateinit var mixinWorkerFactory: MixinWorkerFactory
 //
 //    @Inject
-//    lateinit var jobManager: MixinJobManager
+//    lateinit var jobManager: FoneJobManager
 
     lateinit var appComponent: AppComponent
 

@@ -24,6 +24,7 @@ android {
                 arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
             }
         }
+
         packagingOptions {
             exclude 'kotlin/**'
             exclude '**/*.kotlin_metadata'
@@ -54,6 +55,7 @@ android {
 
 
 dependencies {
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlin_version}"
     implementation "androidx.appcompat:appcompat:${supportLibVersion}"
@@ -101,6 +103,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:${lifecycleVersion}"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${lifecycleVersion}"
     kapt "androidx.lifecycle:lifecycle-compiler:${lifecycleVersion}"
+    implementation "com.github.tougee:android-priority-jobqueue:${jobqueueVersion}"
 
 
     implementation "androidx.room:room-runtime:${roomVersion}"
@@ -119,6 +122,7 @@ dependencies {
     implementation "com.jakewharton.timber:timber:${timberVersion}"
     implementation "com.timehop.stickyheadersrecyclerview:library:${stickyheadersrecyclerviewVersion}"
     implementation "com.github.jorgecastilloprz:fabprogresscircle:${fabprogresscircleVersion}"
+
 
     implementation "com.github.bumptech.glide:glide:$glideVersion"
     implementation("com.github.bumptech.glide:okhttp3-integration:$glideVersion") {

@@ -44,7 +44,7 @@ class ConversationListFragment : LinkFragment() {
     @Inject
     lateinit var navigationController: NavigationController
 //    @Inject
-//    lateinit var jobManager: MixinJobManager
+//    lateinit var jobManager: FoneJobManager
 
     private val messagesViewModel by lazy {
         ViewModelProviders.of(this, viewModelFactory).get(ConversationListViewModel::class.java)

@@ -4,12 +4,18 @@ package com.fone.android.di
 import android.app.Application
 import android.content.ContentResolver
 import android.provider.Settings
+import com.birbit.android.jobqueue.config.Configuration
+import com.birbit.android.jobqueue.scheduling.FrameworkJobSchedulerService
 import com.fone.android.BuildConfig
 import com.fone.android.Constants.API.URL
 import com.fone.android.FoneApplication
 import com.fone.android.api.NetworkException
 import com.fone.android.api.ServerErrorException
 import com.fone.android.extension.networkConnected
+import com.fone.android.job.BaseJob
+import com.fone.android.job.FoneJobManager
+import com.fone.android.job.JobLogger
+import com.fone.android.job.MyJobService
 import com.fone.android.util.LiveDataCallAdapterFactory
 import com.fone.android.util.Session
 import com.fone.android.vo.LinkState
@@ -21,6 +27,7 @@ import okhttp3.Request
 import okhttp3.SessionProvider
 import okhttp3.internal.http2.Header
 import okhttp3.logging.HttpLoggingInterceptor
+import one.mixin.android.job.JobNetworkUtil
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -124,6 +131,32 @@ internal class AppModule {
     @Singleton
     fun provideLinkState() = LinkState()
 
+    @Provides
+    @Singleton
+    fun provideJobNetworkUtil(app: Application) =
+        JobNetworkUtil(app.applicationContext)
+
+    @Suppress("INACCESSIBLE_TYPE")
+    @Provides
+    @Singleton
+    fun jobManager(app: Application, appComponent: AppComponent, jobNetworkUtil: JobNetworkUtil): FoneJobManager {
+        val builder = Configuration.Builder(app)
+            .consumerKeepAlive(20)
+            .resetDelaysOnRestart()
+            .maxConsumerCount(6)
+            .minConsumerCount(2)
+            .injector { job ->
+                if (job is BaseJob) {
+                    job.inject(appComponent)
+                }
+            }
+            .customLogger(JobLogger())
+            .networkUtil(jobNetworkUtil)
+        builder.scheduler(
+            FrameworkJobSchedulerService
+                .createSchedulerFor(app.applicationContext, MyJobService::class.java))
+        return FoneJobManager(builder.build())
+    }
 
 
 }

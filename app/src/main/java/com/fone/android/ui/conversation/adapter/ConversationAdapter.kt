@@ -19,11 +19,9 @@ import com.fone.android.ui.conversation.holder.BaseViewHolder
 import com.fone.android.ui.conversation.holder.MessageHolder
 import com.fone.android.ui.conversation.holder.TimeHolder
 import com.fone.android.ui.conversation.holder.TransparentHolder
-import com.fone.android.ui.home.ConversationListFragment
 import com.fone.android.vo.*
 import com.fone.android.widget.FoneStickyRecyclerHeadersAdapter
 import kotlinx.android.synthetic.main.item_chat_unread.view.*
-
 import kotlin.math.abs
 
 class ConversationAdapter(
@@ -243,7 +241,7 @@ class ConversationAdapter(
         when (viewType) {
             MESSAGE_TYPE -> {
                 val item = LayoutInflater.from(parent.context).inflate(R.layout.item_chat_message, parent, false)
-                ConversationListFragment.MessageHolder(item)
+                MessageHolder(item)
             }
             else -> {
                 val item = LayoutInflater.from(parent.context).inflate(R.layout.item_chat_transparent, parent, false)
