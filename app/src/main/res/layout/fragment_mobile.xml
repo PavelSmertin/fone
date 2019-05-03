@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:clickable="true"
-    android:focusable="true"
-    android:orientation="vertical">
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" xmlns:tools="http://schemas.android.com/tools"
+                android:clickable="true"
+                android:focusable="true"
+                android:orientation="vertical"
+                android:background="@color/colorWindowBackground"
+            >
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,29 +23,61 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="36dp"
             android:text="@string/landing_enter_mobile_number"
-            android:textColor="@android:color/black"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:textColor="@color/white"
         />
 
+        <ImageView
+                android:id="@+id/country_icon_iv"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="16dp"
+                android:paddingBottom="8dp"
+                android:paddingEnd="0dp"
+                android:paddingStart="8dp"
+                android:paddingTop="8dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/flag_cn"
+                app:layout_constraintBottom_toBottomOf="@+id/mobile_et"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/mobile_et"
+                tools:ignore="ContentDescription"/>
+
+        <TextView
+                android:id="@+id/country_code_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:gravity="center_vertical"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/mobile_et"
+                app:layout_constraintStart_toEndOf="@+id/country_icon_iv"
+                app:layout_constraintTop_toTopOf="@+id/mobile_et"
+                tools:text="+86"/>
 
         <EditText
                 android:id="@+id/mobile_et"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:minHeight="@dimen/btn_min_height"
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="36dp"
                 android:hint="@string/landing_enter_mobile_hint"
-                android:inputType="textEmailAddress"
+                android:inputType="number"
                 android:textSize="16sp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/colorGray"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/mobile_title_tv"
-        />
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/country_code_tv"
+                app:layout_constraintTop_toBottomOf="@+id/mobile_title_tv"/>
 
         <TextView
             android:id="@+id/enter_tip"
@@ -62,28 +95,41 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.github.jorgecastilloprz.FABProgressCircle
-        android:id="@+id/mobile_fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        app:arcColor="@android:color/holo_blue_dark"
-        android:layout_alignParentBottom="true">
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/mobile_fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:src="@drawable/ic_arrow_forward_white_24dp"
-            app:backgroundTint="@color/colorBlue"/>
+            android:layout_above="@+id/keyboard"
+            android:layout_alignParentEnd="true"
+            android:visibility="invisible"
+            app:arcColor="@android:color/holo_blue_dark"
+            app:layout_constraintBottom_toTopOf="@+id/keyboard"
+            app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:src="@drawable/ic_arrow_forward_white_24dp"
+                app:backgroundTint="@color/colorBlue"/>
     </com.github.jorgecastilloprz.FABProgressCircle>
 
 
+    <com.fone.android.widget.Keyboard
+            android:id="@+id/keyboard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:translationY="300dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
     <View
-        android:id="@+id/mobile_cover"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/transparent"
-        android:clickable="true"
-        android:visibility="invisible"
-        android:focusable="true"/>
+            android:id="@+id/mobile_cover"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:clickable="true"
+            android:visibility="invisible"
+            android:focusable="true"/>
 </RelativeLayout>

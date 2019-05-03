@@ -36,6 +36,8 @@ buildscript {
         ext.stickyheadersrecyclerviewVersion = '0.4.3@aar'
         ext.jwtVersion = '0.9.1'
         ext.fabprogresscircleVersion = '1.01@aar'
+        ext.countryPickerVersion = '1.0.10'
+        ext.libphonenumberVersion = '8.10.2'
 
         ext.pagingVersion = '2.1.0'
 

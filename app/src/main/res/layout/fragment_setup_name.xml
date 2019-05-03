@@ -24,6 +24,7 @@
         android:layout_marginTop="@dimen/margin12"
         android:text="@string/landing_enter_name_title"
         android:textSize="18sp"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,6 +48,8 @@
             android:layout_height="wrap_content"
             android:hint="@string/landing_enter_name_hint"
             android:lines="1"
+            android:textColor="@color/white"
+            android:textColorHint="@color/colorGray"
             android:textSize="16sp" />
     </com.google.android.material.textfield.TextInputLayout>
 

@@ -122,6 +122,8 @@ dependencies {
     implementation "com.jakewharton.timber:timber:${timberVersion}"
     implementation "com.timehop.stickyheadersrecyclerview:library:${stickyheadersrecyclerviewVersion}"
     implementation "com.github.jorgecastilloprz:fabprogresscircle:${fabprogresscircleVersion}"
+    implementation "com.googlecode.libphonenumber:libphonenumber:${libphonenumberVersion}"
+    implementation "com.github.tougee:country-picker-android:${countryPickerVersion}"
 
 
     implementation "com.github.bumptech.glide:glide:$glideVersion"

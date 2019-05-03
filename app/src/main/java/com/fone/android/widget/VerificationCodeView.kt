@@ -18,7 +18,6 @@ import androidx.annotation.RequiresApi
 import com.fone.android.R
 import com.fone.android.extension.dpToPx
 import kotlinx.android.synthetic.main.view_verification_code.view.*
-import org.jetbrains.anko.backgroundColor
 
 class VerificationCodeView : LinearLayout {
 
@@ -187,7 +186,7 @@ class VerificationCodeView : LinearLayout {
         for (i in 0 until count) {
             codes[i].text = ""
             codes[i].backgroundTintList = ColorStateList.valueOf(color)
-            spaces[i].backgroundColor = color
+            //spaces[i].backgroundColor = color
         }
         isError = false
     }
