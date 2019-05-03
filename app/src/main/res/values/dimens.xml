@@ -18,7 +18,7 @@
     <dimen name="min_custom_keyboard_top_margin">170dp</dimen>
 
     <dimen name="chat_control_height">52dp</dimen>
-    <dimen name="chat_date_size">10sp</dimen>
+    <dimen name="chat_date_size">12sp</dimen>
     <dimen name="avatar_text_size">22sp</dimen>
 
     <dimen name="btn_min_height">48dp</dimen>
