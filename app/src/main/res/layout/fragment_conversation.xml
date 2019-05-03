@@ -22,6 +22,7 @@
 
             <com.fone.android.widget.TitleView
                 android:id="@+id/action_bar"
+                app:need_divider="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
@@ -126,7 +127,7 @@
                         android:textColor="@color/white"
                         android:background="@drawable/bg_unread_small"
                         android:textSize="12sp"
-                        android:fontFamily="monospace"
+                        android:fontFamily="@font/ibm_plex_mono"
                         android:layout_width="wrap_content"
                         android:translationZ="1dp"
                         android:layout_height="wrap_content"/>

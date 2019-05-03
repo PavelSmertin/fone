@@ -13,7 +13,7 @@
         android:layout_marginStart="6dp"
         android:padding="8dp"
         android:background="@drawable/mixin_ripple"
-        android:src="@drawable/ic_back"
+        android:src="@drawable/ic_arrow_back_white_24dp"
         tools:ignore="ContentDescription" />
 
     <ViewAnimator

@@ -2,11 +2,16 @@
 <resources>
     <color name="colorPrimary">#2F3A3E</color>
     <color name="colorPrimaryDark">#1C282D</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorAccent">#7AC101</color>
 
 
     <color name="colorWindowBackground">#131F24</color>
+    <color name="colorSelectItem">#117AC101</color>
 
+    <color name="color_chat_date">#A3A8A9</color>
+
+
+    <color name="colorFone">#7AC101</color>
 
     <color name="colorBlue">#19C2FD</color>
     <color name="colorDarkBlue">#1987FF</color>
@@ -17,7 +22,6 @@
     <color name="black_70">#B2000000</color>
     <color name="gray_50">#88888888</color>
     <color name="gray_light">#757575</color>
-    <color name="color_chat_date">#ff7799A9</color>
     <color name="bg_gray">#F5F5F5</color>
     <color name="divider">#ECECEC</color>
     <color name="text_black">#202020</color>

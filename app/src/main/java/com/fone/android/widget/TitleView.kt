@@ -35,13 +35,13 @@ class TitleView(context: Context, attrs: AttributeSet) : RelativeLayout(context,
             }
             if (ta.hasValue(R.styleable.TitleView_titleColor)) {
                 title_tv.setTextColor(ta.getColor(R.styleable.TitleView_titleColor,
-                    ContextCompat.getColor(context, R.color.black)))
+                    ContextCompat.getColor(context, R.color.white)))
             }
             if (ta.hasValue(R.styleable.TitleView_android_background)) {
                 setBackgroundResource(ta.getResourceId(R.styleable.TitleView_android_background,
-                    ContextCompat.getColor(context, R.color.white)))
+                    ContextCompat.getColor(context, R.color.colorPrimary)))
             } else {
-                setBackgroundResource(R.color.white)
+                setBackgroundResource(R.color.colorPrimary)
             }
             if (ta.hasValue(R.styleable.TitleView_need_divider)) {
                 divider.visibility = if (ta.getBoolean(R.styleable.TitleView_need_divider, true)) VISIBLE else GONE

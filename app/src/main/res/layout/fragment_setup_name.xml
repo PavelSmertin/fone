@@ -12,7 +12,7 @@
         android:layout_marginTop="@dimen/margin12"
         android:padding="@dimen/margin12"
         android:visibility="invisible"
-        app:srcCompat="@drawable/ic_arrow_back_black_24dp" />
+        app:srcCompat="@drawable/ic_arrow_back_white_24dp" />
 
     <TextView
         android:id="@+id/name_title_tv"
@@ -23,7 +23,6 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="@dimen/margin12"
         android:text="@string/landing_enter_name_title"
-        android:textColor="@android:color/black"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

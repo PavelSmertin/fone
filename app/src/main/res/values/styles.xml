@@ -7,10 +7,11 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowLightStatusBar">true</item>
-        <item name="android:fontFamily">@font/sf_pro_regular</item>
+        <item name="android:fontFamily">@font/ibm_plex_mono</item>
         <item name="android:windowBackground">@color/colorWindowBackground</item>
         <item name="android:windowContentTransitions">true</item>
         <item name="android:textColorHighlight">@color/white</item>
+        <item name="android:navigationBarColor">@color/colorPrimary</item>
     </style>
 
     <style name="AppTheme.NoActionBar" parent="AppTheme">
@@ -37,16 +38,15 @@
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:navigationBarColor">@android:color/white</item>
+        <item name="android:navigationBarColor">@color/colorPrimary</item>
     </style>
 
     <style name="AppTheme.Photo" parent="AppTheme.NoActionBar">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:navigationBarColor">@android:color/white</item>
+        <item name="android:navigationBarColor">@color/colorPrimary</item>
     </style>
-
 
     <style name="AppTheme.Call" parent="AppTheme.NoActionBar">
         <item name="android:windowBackground">@color/call_gray</item>
@@ -55,7 +55,7 @@
     </style>
 
     <style name="MixinAlertDialogTheme" parent="Theme.AppCompat.Dialog.Alert">
-        <item name="colorAccent">@color/colorDarkBlue</item>
+        <item name="colorAccent">@color/colorPrimary</item>
         <item name="android:textColorPrimary">@android:color/white</item>
         <item name="android:background">@color/colorWindowBackground</item>
     </style>
@@ -109,14 +109,9 @@
         <item name="android:indeterminateTintMode">src_atop</item>
     </style>
 
-    <style name="AppTheme.WalletBlue">
-        <item name="android:indeterminateTint">@color/wallet_blue_secondary</item>
-        <item name="android:indeterminate">true</item>
-        <item name="android:indeterminateTintMode">src_atop</item>
-    </style>
 
     <style name="AppTheme.WhiteAccent">
-        <item name="android:indeterminateTint">@android:color/white</item>
+        <item name="android:indeterminateTint">@color/colorPrimary</item>
         <item name="android:indeterminate">true</item>
         <item name="android:indeterminateTintMode">src_atop</item>
     </style>
@@ -127,7 +122,7 @@
 
     <style name="AppTheme.Dialog" parent="Theme.Design.Light.BottomSheetDialog">
         <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:navigationBarColor">@color/white</item>
+        <item name="android:navigationBarColor">@color/colorPrimary</item>
         <item name="android:windowFrame">@null</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:layout_width">match_parent</item>
@@ -168,11 +163,18 @@
         <item name="android:maxHeight">2dp</item>
     </style>
 
-
-
-
     <style name="ProgressTheme" parent="Widget.AppCompat.ProgressBar.Horizontal">
         <item name="colorAccent">@color/colorDarkBlue</item>
+    </style>
+
+    <style name="SelectableItemTheme">
+        <item name="colorControlHighlight">@color/colorSelectItem</item>
+    </style>
+    Then:
+
+    <style name="SelectableItemBackground">
+        <item name="android:theme">@style/SelectableItemTheme</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
     </style>
 
 </resources>

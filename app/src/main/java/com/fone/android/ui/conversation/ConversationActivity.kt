@@ -18,7 +18,6 @@ import com.uber.autodispose.autoDisposable
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.activity_chat.*
 import javax.inject.Inject
 
 class ConversationActivity : BlazeBaseActivity() {
@@ -26,7 +25,6 @@ class ConversationActivity : BlazeBaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
-        container.backgroundImage = resources.getDrawable(R.drawable.bg_chat, null)
         showConversation(intent)
         window.decorView.systemUiVisibility = window.decorView.systemUiVisibility or SYSTEM_UI_FLAG_LAYOUT_STABLE
     }
