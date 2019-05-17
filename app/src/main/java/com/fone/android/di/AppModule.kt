@@ -11,6 +11,7 @@ import com.fone.android.Constants.API.URL
 import com.fone.android.FoneApplication
 import com.fone.android.api.NetworkException
 import com.fone.android.api.ServerErrorException
+import com.fone.android.api.service.*
 import com.fone.android.extension.networkConnected
 import com.fone.android.job.BaseJob
 import com.fone.android.job.FoneJobManager
@@ -40,7 +41,7 @@ import kotlin.math.abs
 internal class AppModule {
 
     private val LOCALE = Locale.getDefault().language + "-" + Locale.getDefault().country
-    private val API_UA = "Mixin/" + BuildConfig.VERSION_NAME +
+    private val API_UA = "Fone/" + BuildConfig.VERSION_NAME +
         " (Android " + android.os.Build.VERSION.RELEASE + "; " + android.os.Build.FINGERPRINT + "; " + LOCALE + ")"
 
     private fun getDeviceId(resolver: ContentResolver): String {
@@ -122,6 +123,33 @@ internal class AppModule {
         return builder.build()
     }
 
+
+    @Singleton
+    @Provides
+    fun provideAccountService(retrofit: Retrofit) = retrofit.create(AccountService::class.java) as AccountService
+
+    @Singleton
+    @Provides
+    fun provideUserService(retrofit: Retrofit) = retrofit.create(UserService::class.java) as UserService
+
+    @Singleton
+    @Provides
+    fun provideContactService(retrofit: Retrofit) = retrofit.create(ContactService::class.java) as ContactService
+
+
+    @Singleton
+    @Provides
+    fun provideConversationService(retrofit: Retrofit) =
+        retrofit.create(ConversationService::class.java) as ConversationService
+
+    @Singleton
+    @Provides
+    fun provideMessageService(retrofit: Retrofit) = retrofit.create(MessageService::class.java) as MessageService
+
+    @Singleton
+    @Provides
+    fun provideAuthService(retrofit: Retrofit) =
+        retrofit.create(AuthorizationService::class.java) as AuthorizationService
 
     @Singleton
     @Provides

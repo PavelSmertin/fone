@@ -1,16 +1,17 @@
 package com.fone.android.job
 
+import com.birbit.android.jobqueue.CancelReason
 import com.birbit.android.jobqueue.Job
 import com.birbit.android.jobqueue.Params
 import com.birbit.android.jobqueue.RetryConstraint
 import com.fone.android.api.*
-import com.fone.android.db.ConversationDao
-import com.fone.android.db.FoneDatabase
-import com.fone.android.db.MessageDao
+import com.fone.android.api.service.MessageService
+import com.fone.android.db.*
 import com.fone.android.di.AppComponent
 import com.fone.android.di.Injectable
 import com.fone.android.di.type.DatabaseCategory
 import com.fone.android.di.type.DatabaseCategoryEnum
+import com.fone.android.websocket.ChatWebSocket
 
 import java.net.SocketTimeoutException
 import javax.inject.Inject
@@ -26,6 +27,14 @@ abstract class BaseJob(params: Params) : Job(params), Injectable {
     @field:[DatabaseCategory(DatabaseCategoryEnum.BASE)]
     lateinit var appDatabase: FoneDatabase
 
+
+    @Transient
+    lateinit var messageService: MessageService
+
+    @Inject
+    @Transient
+    lateinit var chatWebSocket: ChatWebSocket
+
     @Inject
     @Transient
     @field:[DatabaseCategory(DatabaseCategoryEnum.BASE)]
@@ -35,6 +44,14 @@ abstract class BaseJob(params: Params) : Job(params), Injectable {
     @Transient
     @field:[DatabaseCategory(DatabaseCategoryEnum.BASE)]
     lateinit var messageDao: MessageDao
+
+    @Inject
+    @Transient
+    lateinit var offsetDao: OffsetDao
+
+    @Inject
+    @Transient
+    lateinit var jobDao: JobDao
 
 
     open fun shouldRetry(throwable: Throwable): Boolean {
@@ -68,15 +85,16 @@ abstract class BaseJob(params: Params) : Job(params), Injectable {
     override fun onAdded() {
     }
 
-//    override fun onCancel(cancelReason: Int, throwable: Throwable?) {
-//        if (cancelReason == CancelReason.REACHED_RETRY_LIMIT) {
-//            throwable?.let {
-//                val metaData = MetaData()
-//                metaData.addToTab("Job", "CancelReason", "REACHED_RETRY_LIMIT")
-//                Bugsnag.notify(it, metaData)
-//            }
-//        }
-//    }
+    override fun onCancel(cancelReason: Int, throwable: Throwable?) {
+        if (cancelReason == CancelReason.REACHED_RETRY_LIMIT) {
+            throwable?.let {
+                // val metaData = MetaData()
+                // metaData.addToTab("Job", "CancelReason", "REACHED_RETRY_LIMIT")
+                // Bugsnag.notify(it, metaData)
+            }
+        }
+    }
+
 
     override fun getRetryLimit(): Int {
         return Integer.MAX_VALUE

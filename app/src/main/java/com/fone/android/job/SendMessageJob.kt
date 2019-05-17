@@ -2,10 +2,13 @@ package com.fone.android.job
 
 import com.birbit.android.jobqueue.Params
 import com.fone.android.vo.Message
+import com.fone.android.websocket.BlazeMessageParam
+import com.fone.android.websocket.createParamBlazeMessage
 
 
 open class SendMessageJob(
     val message: Message,
+    private val recipientId: String? = null,
     messagePriority: Int = PRIORITY_SEND_MESSAGE
 ) : FoneJob(
     Params(messagePriority).addTags(message.id).groupBy("send_message_group")
@@ -45,17 +48,17 @@ open class SendMessageJob(
     private fun sendPlainMessage() {
         val conversation = conversationDao.getConversation(message.conversationId) ?: return
         requestCreateConversation(conversation)
-//        var content = message.content
+        var content = message.content
 //        if (message.category == MessageCategory.PLAIN_TEXT.name) {
 //            if (message.content != null) {
 //                content = Base64.encodeBytes(message.content!!.toByteArray())
 //            }
 //        }
-//        val blazeParam = BlazeMessageParam(message.conversationId, recipientId,
-//            message.id, message.category, content, quote_message_id = message.quoteMessageId)
-//        val blazeMessage = createParamBlazeMessage(blazeParam)
-//
-//        deliver(blazeMessage)
+        val blazeParam = BlazeMessageParam(message.conversationId, recipientId,
+            message.id, message.category, content, quote_message_id = message.quoteMessageId)
+        val blazeMessage = createParamBlazeMessage(blazeParam)
+
+        deliver(blazeMessage)
     }
 
 }

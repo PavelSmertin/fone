@@ -4,6 +4,10 @@ package com.fone.android.extension
 
 
 import android.util.ArrayMap
+import com.fone.android.util.GzipException
+import okio.*
+import org.threeten.bp.Instant
+import java.io.IOException
 import java.security.MessageDigest
 import java.util.*
 import kotlin.collections.set
@@ -67,4 +71,29 @@ fun ByteArray.toHex(): String {
     }
 
     return result.toString()
+}
+
+@Throws(IOException::class)
+fun String.gzip(): ByteString {
+    val result = Buffer()
+    val sink = Okio.buffer(GzipSink(result))
+    sink.use {
+        sink.write(toByteArray())
+    }
+    return result.readByteString()
+}
+
+@Throws(GzipException::class)
+fun ByteString.ungzip(): String {
+    val buffer = Buffer().write(this)
+    val gzip = GzipSource(buffer as Source)
+    return Okio.buffer(gzip).readUtf8()
+}
+
+fun String.getEpochNano(): Long {
+    val inst = Instant.parse(this)
+    var time = inst.epochSecond
+    time *= 1000000000L
+    time += inst.nano
+    return time
 }
