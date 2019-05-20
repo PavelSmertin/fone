@@ -12,6 +12,9 @@ import com.fone.android.FoneApplication
 import com.fone.android.api.NetworkException
 import com.fone.android.api.ServerErrorException
 import com.fone.android.api.service.*
+import com.fone.android.db.*
+import com.fone.android.di.type.DatabaseCategory
+import com.fone.android.di.type.DatabaseCategoryEnum
 import com.fone.android.extension.networkConnected
 import com.fone.android.job.BaseJob
 import com.fone.android.job.FoneJobManager
@@ -20,6 +23,7 @@ import com.fone.android.job.MyJobService
 import com.fone.android.util.LiveDataCallAdapterFactory
 import com.fone.android.util.Session
 import com.fone.android.vo.LinkState
+import com.fone.android.websocket.ChatWebSocket
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides
@@ -157,10 +161,6 @@ internal class AppModule {
 
     @Provides
     @Singleton
-    fun provideLinkState() = LinkState()
-
-    @Provides
-    @Singleton
     fun provideJobNetworkUtil(app: Application) =
         JobNetworkUtil(app.applicationContext)
 
@@ -186,5 +186,25 @@ internal class AppModule {
         return FoneJobManager(builder.build())
     }
 
+    @Provides
+    @Singleton
+    fun provideLinkState() = LinkState()
+
+    @Provides
+    @Singleton
+    fun provideChatWebSocket(
+        okHttp: OkHttpClient,
+        app: Application,
+        @DatabaseCategory(DatabaseCategoryEnum.BASE)
+        conversationDao: ConversationDao,
+        @DatabaseCategory(DatabaseCategoryEnum.BASE)
+        messageDao: MessageDao,
+        offsetDao: OffsetDao,
+        floodMessageDao: FloodMessageDao,
+        jobManager: FoneJobManager,
+        linkState: LinkState,
+        jobDao: JobDao
+    ): ChatWebSocket =
+        ChatWebSocket(okHttp, app, conversationDao, messageDao, offsetDao, floodMessageDao, jobManager, linkState, jobDao)
 
 }
