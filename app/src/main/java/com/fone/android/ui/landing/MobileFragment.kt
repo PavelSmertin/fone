@@ -96,20 +96,6 @@ class MobileFragment : BaseFragment() {
         return true
     }
 
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, data)
-//        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK && data != null) {
-//            val credential = data.getParcelableExtra<Credential>(Credential.EXTRA_KEY)
-//            val phoneNum = try {
-//                PhoneNumberUtil.getInstance().parse(credential.id, Locale.getDefault().country).nationalNumber.toString()
-//            } catch (e: NumberParseException) {
-//                ""
-//            }
-//            mobile_et?.setText(phoneNum)
-//        }
-//    }
-
-
     private fun showDialog() {
         AlertDialog.Builder(context!!, R.style.MixinAlertDialogTheme)
             .setMessage(getString(R.string.landing_invitation_dialog_content,
