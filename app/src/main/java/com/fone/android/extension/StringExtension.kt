@@ -97,3 +97,13 @@ fun String.getEpochNano(): Long {
     time += inst.nano
     return time
 }
+
+inline fun Long.toLeByteArray(): ByteArray {
+    var num = this
+    val result = ByteArray(8)
+    for (i in (0..7)) {
+        result[i] = (num and 0xffL).toByte()
+        num = num shr 8
+    }
+    return result
+}

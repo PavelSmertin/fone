@@ -4,6 +4,7 @@ import com.fone.android.api.FoneResponse
 import com.fone.android.api.request.*
 import com.fone.android.api.response.VerificationResponse
 import com.fone.android.vo.Account
+import com.fone.android.vo.model.ResponseRegister
 import com.google.gson.JsonObject
 import io.reactivex.Observable
 import kotlinx.coroutines.Deferred
@@ -18,8 +19,8 @@ interface AccountService {
     @POST("verifications")
     fun verification(@Body request: VerificationRequest): Observable<FoneResponse<VerificationResponse>>
 
-    @POST("verifications/{id}")
-    fun create(@Path("id") id: String, @Body request: AccountRequest): Observable<FoneResponse<Account>>
+    @POST("register")
+    fun create(@Body request: AccountRequest): Observable<FoneResponse<ResponseRegister>>
 
     @POST("verifications/{id}")
     fun changePhone(@Path("id") id: String, @Body request: AccountRequest): Observable<FoneResponse<Account>>

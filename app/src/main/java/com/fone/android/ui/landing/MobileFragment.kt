@@ -10,7 +10,6 @@ import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
-import androidx.lifecycle.ViewModelProvider
 import com.fone.android.Constants.KEYS
 import com.fone.android.R
 import com.fone.android.extension.addFragment
@@ -26,7 +25,6 @@ import com.google.i18n.phonenumbers.Phonenumber
 import com.mukesh.countrypicker.Country
 import com.mukesh.countrypicker.CountryPicker
 import kotlinx.android.synthetic.main.fragment_mobile.*
-import javax.inject.Inject
 
 class MobileFragment : BaseFragment() {
 
@@ -45,10 +43,6 @@ class MobileFragment : BaseFragment() {
             arguments = b
         }
     }
-
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-
 
     private lateinit var countryPicker: CountryPicker
     private lateinit var mCountry: Country
@@ -112,9 +106,9 @@ class MobileFragment : BaseFragment() {
         if (!isAdded) return
         mobile_fab.show()
         mobile_cover.visibility = VISIBLE
-
+        val phoneNum = phoneUtil.format(phoneNumber, PhoneNumberUtil.PhoneNumberFormat.E164)
         activity?.addFragment(this@MobileFragment,
-            VerificationFragment.newInstance("-1", mobile_et.text.toString()), VerificationFragment.TAG)
+            VerificationFragment.newInstance("-1", phoneNum), VerificationFragment.TAG)
 
     }
 

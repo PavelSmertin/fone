@@ -28,4 +28,7 @@ constructor(private val userDao: UserDao, private val appDao: AppDao) {
             userDao.insertUpdate(user, appDao)
         }
     }
+
+    fun updatePhone(id: String, phone: String) = userDao.updatePhone(id, phone)
+
 }

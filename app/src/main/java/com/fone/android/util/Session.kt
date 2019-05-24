@@ -101,8 +101,6 @@ class Session {
 
         fun checkToken() = getAccount() != null && !getToken().isNullOrBlank()
 
-
-
         fun signToken(acct: Account?, request: Request): String {
             val token = getToken()
             if (acct == null || token == null || token.isBlank()) {
@@ -131,5 +129,14 @@ class Session {
         }
 
     }
+
+}
+
+fun encryptPin(key: String, code: String?): String? {
+    val pinCode = code ?: return null
+    val iterator = Session.getPinIterator()
+    val based = aesEncrypt(key, iterator, pinCode)
+    Session.storePinIterator(iterator + 1)
+    return based
 }
 

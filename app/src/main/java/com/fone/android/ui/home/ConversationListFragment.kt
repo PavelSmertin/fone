@@ -71,8 +71,6 @@ class ConversationListFragment : LinkFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        doAsync { messagesViewModel.createGroupConversation("1") }
-
         message_rv.adapter = messageAdapter
         message_rv.itemAnimator = null
         message_rv.setHasFixedSize(true)

@@ -15,6 +15,8 @@ import com.fone.android.Constants
 import com.fone.android.Constants.KEYS
 import com.fone.android.FoneApplication
 import com.fone.android.R
+import com.fone.android.api.FoneResponse
+import com.fone.android.api.request.AccountRequest
 import com.fone.android.extension.defaultSharedPreferences
 import com.fone.android.extension.nowInUtc
 import com.fone.android.extension.putBoolean
@@ -22,11 +24,14 @@ import com.fone.android.extension.vibrate
 import com.fone.android.ui.common.BaseFragment
 import com.fone.android.ui.landing.LandingActivity.Companion.ARGS_PIN
 import com.fone.android.ui.landing.MobileFragment.Companion.ARGS_PHONE_NUM
+import com.fone.android.util.ErrorHandler
 import com.fone.android.util.Session
 import com.fone.android.vo.Account
+import com.fone.android.vo.model.ResponseRegister
 import com.fone.android.vo.toUser
 import com.fone.android.widget.Keyboard
 import com.fone.android.widget.VerificationCodeView
+import com.uber.autodispose.autoDisposable
 import kotlinx.android.synthetic.main.fragment_verification.*
 import javax.inject.Inject
 
@@ -90,48 +95,98 @@ class VerificationFragment : BaseFragment() {
 
     @SuppressLint("CheckResult")
     private fun handleLogin() {
-        verification_next_fab.hide()
-        verification_cover.visibility = GONE
+        showLoading()
 
-        var account = Account(
-            "1",
-            "1",
-            "default",
-            "0000-0000-0000-0000",
-            "-1",
-            "Твой батя",
-            "https://placeimg.com/140/140/any",
-            "123",
-            null,
-            "-1",
-            "0000",
-            0,
-            "-1",
-            "-1",
-            nowInUtc(),
-            "empty",
-            true,
-            "empty"
+        val accountRequest = AccountRequest(
+            "у девочки нет имени",
+            arguments!!.getString(ARGS_PHONE_NUM)
         )
 
-        Session.storeAccount(account)
-        Session.storeToken("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI0NDc4MzIxODA1ODY2NzYyMjUiLCJleHAiOjE1NTc5NDc2MTd9.ROFRBEX9UID95-B8-uXTOAZIkr67Nhp9LeHOeHeLApE")
-        verification_keyboard.animate().translationY(300f).start()
+        mobileViewModel.create(arguments!!.getString(ARGS_ID)!!, accountRequest)
+            .autoDisposable(scopeProvider).subscribe({ r: FoneResponse<ResponseRegister> ->
+                if (!isAdded) {
+                    return@subscribe
+                }
+                verification_next_fab.hide()
+                verification_cover.visibility = GONE
+                if (!r.isSuccess) {
+                    handleFailure(r)
+                    return@subscribe
+                }
 
-        FoneApplication.get().onlining.set(true)
-        //if (account.full_name?.isBlank()!!) {
-            defaultSharedPreferences.putBoolean(Constants.Account.PREF_SET_NAME, true)
-            mobileViewModel.insertUser(account.toUser())
-            mobileViewModel.initialConversation()
-            InitializeActivity.showLoading(context!!)
-        //}
-        activity?.finish()
+                var responseRegister = r.data!!
+
+                account = Account(
+                    "1",
+                    "1",
+                    "default",
+                    "0000-0000-0000-0000",
+                    "-1",
+                    "Твой батя",
+                    "https://placeimg.com/140/140/any",
+                    "123",
+                    null,
+                    "-1",
+                    "0000",
+                    0,
+                    "-1",
+                    "-1",
+                    nowInUtc(),
+                    "empty",
+                    true,
+                    "empty"
+                )
+
+                Session.storeAccount(account)
+                Session.storeToken(responseRegister.token)
+
+                verification_keyboard.animate().translationY(300f).start()
+                FoneApplication.get().onlining.set(true)
+                defaultSharedPreferences.putBoolean(Constants.Account.PREF_SET_NAME, true)
+                mobileViewModel.insertUser(account.toUser())
+                mobileViewModel.initialConversation()
+
+                InitializeActivity.showSetupName(context!!)
+                activity?.finish()
+            }, { t: Throwable ->
+                handleError(t)
+            })
     }
 
     private fun sendVerification() {
         pin_verification_view?.clear()
         startCountDown()
     }
+
+    private fun handleFailure(r: FoneResponse<ResponseRegister>) {
+        pin_verification_view.error()
+        pin_verification_tip_tv.visibility = View.VISIBLE
+        pin_verification_tip_tv.text = getString(R.string.landing_validation_error)
+        if (r.errorCode == ErrorHandler.PHONE_VERIFICATION_CODE_INVALID ||
+            r.errorCode == ErrorHandler.PHONE_VERIFICATION_CODE_EXPIRED) {
+            verification_next_fab.visibility = View.INVISIBLE
+        }
+        ErrorHandler.handleMixinError(r.errorCode)
+    }
+
+    private fun handleError(t: Throwable) {
+        verification_next_fab.hide()
+        verification_cover.visibility = GONE
+        ErrorHandler.handleError(t)
+    }
+
+    private fun showLoading() {
+        verification_next_fab.visibility = View.VISIBLE
+        verification_next_fab.show()
+        verification_cover.visibility = View.VISIBLE
+    }
+
+    private fun hideLoading() {
+        verification_next_fab.hide()
+        verification_next_fab.visibility = GONE
+        verification_cover.visibility = GONE
+    }
+
 
     private fun startCountDown() {
         mCountDownTimer?.cancel()
@@ -184,6 +239,9 @@ class VerificationFragment : BaseFragment() {
         override fun onCodeEntered(code: String) {
             pin_verification_tip_tv.visibility = INVISIBLE
             if (code.isEmpty() || code.length != pin_verification_view.count) {
+                if (isAdded) {
+                    hideLoading()
+                }
                 return
             }
             handleLogin()

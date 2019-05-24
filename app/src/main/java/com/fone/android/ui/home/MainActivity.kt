@@ -91,6 +91,63 @@ class MainActivity : BlazeBaseActivity() {
                 val innerIntent: Intent?
                 var conversation = conversationDao.findConversationById(conversationId)
 
+//                if (conversation == null) {
+//                    val response = conversationService.getConversation(conversationId).execute().body()
+//                    if (response != null && response.isSuccess) {
+//                        response.data?.let { data ->
+//                            var ownerId: String = data.creatorId
+//                            if (data.category == ConversationCategory.CONTACT.name) {
+//                                ownerId = data.participants.find { p -> p.userId != Session.getAccountId() }!!.userId
+//                            } else if (data.category == ConversationCategory.GROUP.name) {
+//                                ownerId = data.creatorId
+//                            }
+//                            var c = conversationDao.findConversationById(data.conversationId)
+//                            if (c == null) {
+//                                c = Conversation(
+//                                    data.conversationId,
+//                                    ownerId,
+//                                    data.category,
+//                                    data.name,
+//                                    data.iconUrl,
+//                                    data.announcement,
+//                                    data.codeUrl,
+//                                    "",
+//                                    data.createdAt,
+//                                    null,
+//                                    null,
+//                                    null,
+//                                    0,
+//                                    ConversationStatus.SUCCESS.ordinal,
+//                                    null)
+//                                conversation = c
+//                                conversationDao.insertConversation(c)
+//                            } else {
+//                                conversationDao.updateConversation(data.conversationId, ownerId, data.category,
+//                                    data.name, data.announcement, data.muteUntil, data.createdAt, ConversationStatus.SUCCESS.ordinal)
+//                            }
+//
+//                            val participants = mutableListOf<Participant>()
+//                            val userIdList = mutableListOf<String>()
+//                            for (p in data.participants) {
+//                                val item = Participant(conversationId, p.userId, p.role, p.createdAt!!)
+//                                if (p.role == ParticipantRole.OWNER.name) {
+//                                    participants.add(0, item)
+//                                } else {
+//                                    participants.add(item)
+//                                }
+//
+//                                val u = userDao.findUser(p.userId)
+//                                if (u == null) {
+//                                    userIdList.add(p.userId)
+//                                }
+//                            }
+//                            if (userIdList.isNotEmpty()) {
+//                                jobManager.addJobInBackground(RefreshUserJob(userIdList))
+//                            }
+//                            participantDao.insertList(participants)
+//                        }
+//                    }
+//                }
                 if (conversation?.isGroup() == true) {
                     innerIntent = ConversationActivity.putIntent(this, conversationId)
                 } else {
@@ -110,6 +167,47 @@ class MainActivity : BlazeBaseActivity() {
                 })
         }
     }
+
+
+//    private fun initView() {
+//        search_bar.setOnLeftClickListener(View.OnClickListener {
+//            navigationController.pushWallet()
+//        })
+//
+//        search_bar.setOnRightClickListener(View.OnClickListener {
+//            navigationController.pushContacts()
+//        })
+//
+//        search_bar.setOnBackClickListener(View.OnClickListener {
+//            navigationController.hideSearch()
+//            search_bar.closeSearch()
+//        })
+//
+//        search_bar.mOnQueryTextListener = object : MaterialSearchView.OnQueryTextListener {
+//            override fun onQueryTextChange(newText: String): Boolean {
+//                SearchFragment.getInstance().setQueryText(newText)
+//                return true
+//            }
+//        }
+//
+//        search_bar.setSearchViewListener(object : MaterialSearchView.SearchViewListener {
+//            override fun onSearchViewClosed() {
+//                navigationController.hideSearch()
+//            }
+//
+//            override fun onSearchViewOpened() {
+//                navigationController.showSearch()
+//            }
+//        })
+//        root_view.setOnKeyListener { _, keyCode, _ ->
+//            if (keyCode == KeyEvent.KEYCODE_BACK && search_bar.isOpen) {
+//                search_bar.closeSearch()
+//                true
+//            } else {
+//                false
+//            }
+//        }
+//    }
 
     companion object {
         private const val URL = "url"
