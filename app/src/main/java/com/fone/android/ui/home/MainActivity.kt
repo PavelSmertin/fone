@@ -4,6 +4,8 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.KeyEvent
+import android.view.View
 import com.fone.android.Constants
 import com.fone.android.FoneApplication
 import com.fone.android.R
@@ -21,10 +23,12 @@ import com.fone.android.ui.landing.LoadingFragment
 import com.fone.android.util.ErrorHandler
 import com.fone.android.util.Session
 import com.fone.android.vo.isGroup
+import com.fone.android.widget.MaterialSearchView
 import com.uber.autodispose.autoDisposable
 import io.reactivex.Maybe
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.alert
 import javax.inject.Inject
 
@@ -70,6 +74,7 @@ class MainActivity : BlazeBaseActivity() {
             navigationController.navigateToMessage()
         }
 
+        initView()
         handlerCode(intent)
     }
 
@@ -169,45 +174,42 @@ class MainActivity : BlazeBaseActivity() {
     }
 
 
-//    private fun initView() {
-//        search_bar.setOnLeftClickListener(View.OnClickListener {
-//            navigationController.pushWallet()
-//        })
-//
-//        search_bar.setOnRightClickListener(View.OnClickListener {
-//            navigationController.pushContacts()
-//        })
-//
-//        search_bar.setOnBackClickListener(View.OnClickListener {
-//            navigationController.hideSearch()
-//            search_bar.closeSearch()
-//        })
-//
-//        search_bar.mOnQueryTextListener = object : MaterialSearchView.OnQueryTextListener {
-//            override fun onQueryTextChange(newText: String): Boolean {
-//                SearchFragment.getInstance().setQueryText(newText)
-//                return true
-//            }
-//        }
-//
-//        search_bar.setSearchViewListener(object : MaterialSearchView.SearchViewListener {
-//            override fun onSearchViewClosed() {
-//                navigationController.hideSearch()
-//            }
-//
-//            override fun onSearchViewOpened() {
-//                navigationController.showSearch()
-//            }
-//        })
-//        root_view.setOnKeyListener { _, keyCode, _ ->
-//            if (keyCode == KeyEvent.KEYCODE_BACK && search_bar.isOpen) {
-//                search_bar.closeSearch()
-//                true
-//            } else {
-//                false
-//            }
-//        }
-//    }
+    private fun initView() {
+
+        search_bar.setOnRightClickListener(View.OnClickListener {
+            navigationController.pushContacts()
+        })
+
+        search_bar.setOnBackClickListener(View.OnClickListener {
+            navigationController.hideSearch()
+            search_bar.closeSearch()
+        })
+
+        search_bar.mOnQueryTextListener = object : MaterialSearchView.OnQueryTextListener {
+            override fun onQueryTextChange(newText: String): Boolean {
+                //SearchFragment.getInstance().setQueryText(newText)
+                return true
+            }
+        }
+
+        search_bar.setSearchViewListener(object : MaterialSearchView.SearchViewListener {
+            override fun onSearchViewClosed() {
+                navigationController.hideSearch()
+            }
+
+            override fun onSearchViewOpened() {
+                navigationController.showSearch()
+            }
+        })
+        root_view.setOnKeyListener { _, keyCode, _ ->
+            if (keyCode == KeyEvent.KEYCODE_BACK && search_bar.isOpen) {
+                search_bar.closeSearch()
+                true
+            } else {
+                false
+            }
+        }
+    }
 
     companion object {
         private const val URL = "url"

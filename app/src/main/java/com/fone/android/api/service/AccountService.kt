@@ -20,7 +20,7 @@ interface AccountService {
     fun verification(@Body request: VerificationRequest): Observable<FoneResponse<VerificationResponse>>
 
     @POST("register")
-    fun create(@Body request: AccountRequest): Observable<FoneResponse<ResponseRegister>>
+    fun create(@Body request: AccountRequest): Observable<ResponseRegister>
 
     @POST("verifications/{id}")
     fun changePhone(@Path("id") id: String, @Body request: AccountRequest): Observable<FoneResponse<Account>>

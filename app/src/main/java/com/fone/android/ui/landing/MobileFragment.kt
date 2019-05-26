@@ -106,7 +106,9 @@ class MobileFragment : BaseFragment() {
         if (!isAdded) return
         mobile_fab.show()
         mobile_cover.visibility = VISIBLE
-        val phoneNum = phoneUtil.format(phoneNumber, PhoneNumberUtil.PhoneNumberFormat.E164)
+        //val phoneNum = phoneUtil.format(phoneNumber, PhoneNumberUtil.PhoneNumberFormat.E164)
+        val phoneNum = phoneNumber!!.nationalNumber
+
         activity?.addFragment(this@MobileFragment,
             VerificationFragment.newInstance("-1", phoneNum), VerificationFragment.TAG)
 

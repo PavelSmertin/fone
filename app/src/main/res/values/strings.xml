@@ -9,6 +9,8 @@
     <string name="slide_to_cancel">Slide to Cancel</string>
     <string name="loading_init">Initializing…</string>
     <string name="loading_wait">Please wait a moment</string>
+    <string name="search_hint">Contacts and Chats</string>
+
 
     <string name="state_connecting">Connecting</string>
     <string name="state_syncing">Syncing messages</string>

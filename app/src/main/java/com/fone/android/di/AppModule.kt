@@ -28,6 +28,7 @@ import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterF
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
+import okhttp3.Protocol
 import okhttp3.Request
 import okhttp3.SessionProvider
 import okhttp3.internal.http2.Header
@@ -63,6 +64,7 @@ internal class AppModule {
             builder.addNetworkInterceptor(logging)
         }
         builder.connectTimeout(10, TimeUnit.SECONDS)
+        builder.protocols(Arrays.asList(Protocol.HTTP_1_1))
         builder.writeTimeout(10, TimeUnit.SECONDS)
         builder.readTimeout(10, TimeUnit.SECONDS)
         builder.pingInterval(15, TimeUnit.SECONDS)

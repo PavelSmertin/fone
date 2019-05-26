@@ -60,7 +60,7 @@ constructor(
     fun verification(request: VerificationRequest): Observable<FoneResponse<VerificationResponse>> =
         accountRepository.verification(request).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
 
-    fun create(id: String, request: AccountRequest): Observable<FoneResponse<ResponseRegister>> =
+    fun create(id: String, request: AccountRequest): Observable<ResponseRegister> =
         accountRepository.create(id, request).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
 
     fun update(request: AccountUpdateRequest): Observable<FoneResponse<Account>> =

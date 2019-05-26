@@ -22,7 +22,7 @@ class AccountRepository
     fun verification(request: VerificationRequest): Observable<FoneResponse<VerificationResponse>> =
         accountService.verification(request)
 
-    fun create(id: String, request: AccountRequest): Observable<FoneResponse<ResponseRegister>> =
+    fun create(id: String, request: AccountRequest): Observable<ResponseRegister> =
         accountService.create(request)
 
     fun changePhone(id: String, request: AccountRequest): Observable<FoneResponse<Account>> =

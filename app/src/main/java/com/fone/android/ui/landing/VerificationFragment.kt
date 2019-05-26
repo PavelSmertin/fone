@@ -41,7 +41,7 @@ class VerificationFragment : BaseFragment() {
         const val TAG: String = "VerificationFragment"
         private const val ARGS_ID = "args_id"
 
-        fun newInstance(id: String, phoneNum: String, pin: String? = null): VerificationFragment {
+        fun newInstance(id: String, phoneNum: Long, pin: String? = null): VerificationFragment {
             val verificationFragment = VerificationFragment()
             val b = bundleOf(
                 ARGS_ID to id,
@@ -78,7 +78,7 @@ class VerificationFragment : BaseFragment() {
         back_iv.setOnClickListener { activity?.onBackPressed() }
         pin_verification_view.setOnCodeEnteredListener(mPinVerificationListener)
         pin_verification_title_tv.text =
-            getString(R.string.landing_validation_title, arguments!!.getString(ARGS_PHONE_NUM))
+            getString(R.string.landing_validation_title, arguments!!.getLong(ARGS_PHONE_NUM).toString())
         verification_left_bottom_tv.setOnClickListener { sendVerification() }
         verification_keyboard.setKeyboardKeys(KEYS)
         verification_keyboard.setOnClickKeyboardListener(mKeyboardListener)
@@ -99,22 +99,22 @@ class VerificationFragment : BaseFragment() {
 
         val accountRequest = AccountRequest(
             "у девочки нет имени",
-            arguments!!.getString(ARGS_PHONE_NUM)
+            arguments!!.getLong(ARGS_PHONE_NUM)
         )
 
         mobileViewModel.create(arguments!!.getString(ARGS_ID)!!, accountRequest)
-            .autoDisposable(scopeProvider).subscribe({ r: FoneResponse<ResponseRegister> ->
+            .autoDisposable(scopeProvider).subscribe({ r: ResponseRegister ->
                 if (!isAdded) {
                     return@subscribe
                 }
                 verification_next_fab.hide()
                 verification_cover.visibility = GONE
-                if (!r.isSuccess) {
-                    handleFailure(r)
-                    return@subscribe
-                }
+//                if (!r.isSuccess) {
+//                    handleFailure(r)
+//                    return@subscribe
+//                }
 
-                var responseRegister = r.data!!
+                var responseRegister = r //.data!!
 
                 account = Account(
                     "1",
