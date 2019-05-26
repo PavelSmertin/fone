@@ -15,13 +15,11 @@ import android.view.View
 import android.view.View.OnFocusChangeListener
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import com.fone.android.R
 import com.fone.android.extension.*
 import com.jakewharton.rxbinding3.widget.textChanges
 import kotlinx.android.synthetic.main.view_search.view.*
-
 import java.util.concurrent.TimeUnit
 
 class MaterialSearchView : FrameLayout {
@@ -53,17 +51,7 @@ class MaterialSearchView : FrameLayout {
         val typedArray = context.obtainStyledAttributes(attributeSet,
             R.styleable.MaterialSearchView, defStyleAttribute, 0)
         if (typedArray != null) {
-            if (typedArray.hasValue(R.styleable.MaterialSearchView_android_textColor)) {
-                setTextColor(typedArray.getColor(R.styleable.MaterialSearchView_android_textColor,
-                    ContextCompat.getColor(context, R.color.black)))
-            }
-            if (typedArray.hasValue(R.styleable.MaterialSearchView_android_textColorHint)) {
-                setHintTextColor(typedArray.getColor(R.styleable.MaterialSearchView_android_textColorHint,
-                    ContextCompat.getColor(context, R.color.gray_50)))
-            }
-            if (typedArray.hasValue(R.styleable.MaterialSearchView_android_hint)) {
-                setHint(typedArray.getString(R.styleable.MaterialSearchView_android_hint))
-            }
+
             if (typedArray.hasValue(R.styleable.MaterialSearchView_searchCloseIcon)) {
                 setCancelIcon(typedArray.getResourceId(
                     R.styleable.MaterialSearchView_searchCloseIcon,

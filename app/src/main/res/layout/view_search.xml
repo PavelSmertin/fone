@@ -16,6 +16,7 @@
         android:layout_marginEnd="4dp"
         android:layout_marginStart="4dp"
         app:srcCompat="@drawable/ic_back"
+        android:visibility="invisible"
         tools:ignore="ContentDescription"/>
 
     <ImageButton
@@ -40,7 +41,7 @@
         android:padding="8dp"
         android:layout_marginEnd="4dp"
         android:layout_marginStart="4dp"
-        app:srcCompat="@drawable/ic_group"
+        app:srcCompat="@drawable/ic_chat_more"
         tools:ignore="ContentDescription"/>
 
     <TextView
@@ -49,15 +50,14 @@
         android:layout_height="match_parent"
         android:layout_marginBottom="10dp"
         android:layout_marginEnd="54dp"
-        android:layout_marginStart="54dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="10dp"
         android:layout_gravity="center_vertical"
-        android:background="@drawable/bg_search"
+        android:background="@drawable/bg_input"
         android:hint="@string/search_hint"
         android:gravity="center_vertical"
         android:paddingEnd="24dp"
         android:paddingStart="12dp"
-        android:textColor="@color/black"
         android:textColorHint="@color/text_light_gray"
         android:textSize="14sp"/>
 
@@ -79,8 +79,8 @@
         android:gravity="center_vertical"
         android:paddingEnd="24dp"
         android:paddingStart="12dp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/gray_50"
+        android:textColor="@color/white"
+        android:textColorHint="@color/text_light_gray"
         android:textSize="14sp"
         android:visibility="invisible"/>
 

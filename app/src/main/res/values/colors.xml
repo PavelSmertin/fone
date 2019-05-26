@@ -23,7 +23,7 @@
     <color name="gray_50">#88888888</color>
     <color name="gray_light">#757575</color>
     <color name="bg_gray">#F5F5F5</color>
-    <color name="divider">#ECECEC</color>
+    <color name="divider">#88000000</color>
     <color name="text_black">#202020</color>
     <color name="text_gray">#bbbbbb</color>
     <color name="text_white">#EFEFF4</color>

@@ -2,7 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
              android:layout_width="match_parent"
              android:layout_height="@dimen/item_contact_height"
-             android:background="@android:color/white"
+             android:background="@color/colorPrimary"
              android:foreground="?attr/selectableItemBackground">
 
     <LinearLayout
@@ -29,8 +29,8 @@
                 android:ellipsize="end"
                 android:singleLine="true"
                 android:layout_marginStart="@dimen/activity_horizontal_margin"
-                android:maxLines="1"
-                android:textColor="@android:color/black"/>
+                android:textColor="@color/white"
+                android:maxLines="1" />
     </LinearLayout>
 
     <View

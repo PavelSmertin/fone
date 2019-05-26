@@ -27,6 +27,7 @@ import io.reactivex.schedulers.Schedulers
 import ir.mirrajabi.rxcontacts.Contact
 import ir.mirrajabi.rxcontacts.RxContacts
 import kotlinx.android.synthetic.main.fragment_contacts.*
+import kotlinx.android.synthetic.main.view_title.view.*
 import java.util.*
 import javax.inject.Inject
 
@@ -72,7 +73,7 @@ class ContactsFragment : BaseFragment() {
             contactAdapter.setFooter(footer)
         }
         contactAdapter.setContactListener(mContactListener)
-        //title_view.left_ib.setOnClickListener { activity?.onBackPressed() }
+        title_view.left_ib.setOnClickListener { activity?.onBackPressed() }
         //title_view.right_animator.setOnClickListener { SettingActivity.show(context!!) }
 
         if (hasContactPermission()) {

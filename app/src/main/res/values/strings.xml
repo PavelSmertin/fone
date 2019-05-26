@@ -157,8 +157,8 @@
     <string name="contact_other_remove">Remove Contact</string>
     <string name="contact_other_transactions">Transactions</string>
     <string name="contact_less_title">Contact</string>
-    <string name="contact_less_invite">Invite to Mixin</string>
-    <string name="contact_less_invite_content">Hey, I\'m using Mixin Messenger to chat. Download it here: https://mixin.one/messenger .</string>
+    <string name="contact_less_invite">Invite to Fone</string>
+    <string name="contact_less_invite_content">Hey, I\'m using Fone Messenger to chat. Download it here: https://fone.one/messenger .</string>
     <string name="contact_mute_title">Mute notifications for…</string>
     <string name="contact_mute_8hours">8 Hours</string>
     <string name="contact_mute_1week">1 Week</string>
@@ -167,20 +167,20 @@
     <string name="contact_new_group_chat_title">New Group Chat</string>
     <string name="contact_new_group_chat_desc">Create a group chat with up to  friends</string>
     <string name="contact_add_contact_title">Add Contact</string>
-    <string name="contact_add_contact_desc">Add people by Mixin ID or phone number</string>
-    <string name="contact_qr_mixin">Mixin QR Code</string>
-    <string name="contact_qr_desc">Scan a friend\'s Mixin QR code</string>
+    <string name="contact_add_contact_desc">Add people by User ID or phone number</string>
+    <string name="contact_qr_mixin">QR Code</string>
+    <string name="contact_qr_desc">Scan a friend\'s Fine QR code</string>
     <string name="contact_invite_title">Invite People</string>
     <string name="contact_invite_desc">My invitation code is %1$s</string>
-    <string name="contact_mixin_id" translatable="false">Mixin ID: %1$s</string>
+    <string name="contact_mixin_id" translatable="false">User ID: %1$s</string>
     <string name="contact_mobile">Mobile: %1$s</string>
     <string name="contact_empty">Phone Contacts</string>
-    <string name="contact_empty_tip">Mixin needs access your contacts to help you connect with other people on Mixin.</string>
+    <string name="contact_empty_tip">Fone needs access your contacts to help you connect with other people on Fone.</string>
     <string name="contact_item_title">CONTACTS</string>
     <string name="contact_sq_scan_title">Extract QR Code</string>
     <string name="contact_save_image">Save Image</string>
     <string name="contact_my_qr_title">My QR Code</string>
-    <string name="contact_my_qr_tip">Scan the QR code to add me on Mixin</string>
+    <string name="contact_my_qr_tip">Scan the QR code to add me on Fone</string>
     <string name="contact_receive_money">Receive Money</string>
     <string name="contact_receive_tip">Scan the QR Code to pay me</string>
     <!--profile-->

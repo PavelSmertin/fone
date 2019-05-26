@@ -9,7 +9,6 @@
         android:id="@+id/contact_header_rl"
         android:layout_width="match_parent"
         android:layout_height="90dp"
-        android:background="@android:color/white"
         android:foreground="?attr/selectableItemBackground">
 
         <com.fone.android.widget.AvatarView
@@ -27,9 +26,9 @@
             android:layout_marginBottom="4dp"
             android:layout_marginEnd="@dimen/activity_horizontal_margin"
             android:layout_toEndOf="@+id/contact_header_avatar"
+            android:textColor="@color/white"
             android:ellipsize="end"
             android:singleLine="true"
-            android:textColor="@android:color/black"
             android:textSize="16sp"/>
 
         <TextView
@@ -63,43 +62,12 @@
         android:layout_height=".5dp"
         android:background="@color/divider"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:background="@android:color/white">
-
-        <FrameLayout
-            android:id="@+id/receive_fl"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:foreground="?attr/selectableItemBackground">
-
-            <TextView
-                android:id="@+id/receive_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:drawablePadding="8dp"
-                android:drawableStart="@drawable/ic_contacts_receive"
-                android:textColor="@color/black"
-                android:text="@string/contact_receive_money"/>
-        </FrameLayout>
-
-        <View
-            android:layout_width=".5dp"
-            android:layout_height="match_parent"
-            android:background="@color/divider"/>
-
-    </LinearLayout>
-
     <include layout="@layout/view_item_divider"/>
 
     <RelativeLayout
         android:id="@+id/new_group_rl"
         android:layout_width="match_parent"
         android:layout_height="@dimen/item_contact_height"
-        android:background="@android:color/white"
         android:foreground="?attr/selectableItemBackground">
 
         <androidx.legacy.widget.Space
@@ -148,7 +116,6 @@
         android:id="@+id/add_contact_rl"
         android:layout_width="match_parent"
         android:layout_height="@dimen/item_contact_height"
-        android:background="@android:color/white"
         android:foreground="?attr/selectableItemBackground">
 
         <androidx.legacy.widget.Space
@@ -199,7 +166,7 @@
         android:layout_height="@dimen/item_contact_height"
         android:visibility="gone"
         android:foreground="?attr/selectableItemBackground"
-        android:background="@android:color/white">
+    >
 
         <androidx.legacy.widget.Space
             android:id="@+id/center_invite"

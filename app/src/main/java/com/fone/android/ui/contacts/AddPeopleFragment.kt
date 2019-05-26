@@ -24,7 +24,7 @@ import com.google.i18n.phonenumbers.NumberParseException
 import com.google.i18n.phonenumbers.PhoneNumberUtil
 import com.uber.autodispose.autoDisposable
 import kotlinx.android.synthetic.main.fragment_add_people.*
-import kotlinx.android.synthetic.main.view_search.view.*
+import kotlinx.android.synthetic.main.view_title.view.*
 import java.util.*
 import javax.inject.Inject
 
