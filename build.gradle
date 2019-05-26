@@ -38,6 +38,8 @@ buildscript {
         ext.fabprogresscircleVersion = '1.01@aar'
         ext.countryPickerVersion = '1.0.10'
         ext.libphonenumberVersion = '8.10.2'
+        ext.rxContactsVersion = '1.1'
+        ext.ucropVersion = '2.2.1'
 
         ext.pagingVersion = '2.1.0'
 

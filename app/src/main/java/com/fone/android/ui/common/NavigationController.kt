@@ -2,6 +2,7 @@ package com.fone.android.ui.common
 
 import androidx.fragment.app.FragmentManager
 import com.fone.android.R
+import com.fone.android.ui.contacts.ContactsActivity
 import com.fone.android.ui.home.ConversationListFragment
 import com.fone.android.ui.home.MainActivity
 import javax.inject.Inject
@@ -14,7 +15,7 @@ constructor(mainActivity: MainActivity) {
     private val context = mainActivity
 
     fun pushContacts() {
-        //ContactsActivity.show(context)
+        ContactsActivity.show(context)
     }
 
     fun navigateToMessage() {

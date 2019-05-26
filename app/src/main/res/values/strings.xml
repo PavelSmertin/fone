@@ -10,6 +10,9 @@
     <string name="loading_init">Initializing…</string>
     <string name="loading_wait">Please wait a moment</string>
     <string name="search_hint">Contacts and Chats</string>
+    <string name="mute">Mute</string>
+    <string name="un_mute">Unmute</string>
+    <string name="name">Name</string>
 
 
     <string name="state_connecting">Connecting</string>
@@ -34,8 +37,7 @@
     <string name="conversation_status_transfer">Transfer</string>
     <string name="conversation_status_sticker">Sticker</string>
     <string name="conversation_waiting">Waiting for this message.</string>
-    <!--contact-->
-    <string name="contact_less_title">Contact</string>
+
 
     <string name="chat_group_create">%1$s created group \"%2$s\"</string>
     <string name="chat_group_add">%1$s added %2$s</string>
@@ -142,6 +144,63 @@
     <string name="error_too_small_withdraw_amount">ERROR %1$d: Withdraw amount too small</string>
     <string name="error_minimum_withdraw_amount">Minimum withdraw amount is %1$s</string>
 
+    <!--avatar-->
+    <string name="avatar_transition_name" translatable="false">avatar_transition_name</string>
+
+    <!--contact-->
+    <string name="title_home">Contacts</string>
+    <string name="contact_other_add">Add Contact</string>
+    <string name="contact_other_send">Send Message</string>
+    <string name="contact_other_share">Share Contact Card</string>
+    <string name="contact_other_block">Block User</string>
+    <string name="contact_other_unblock">Unblock User</string>
+    <string name="contact_other_remove">Remove Contact</string>
+    <string name="contact_other_transactions">Transactions</string>
+    <string name="contact_less_title">Contact</string>
+    <string name="contact_less_invite">Invite to Mixin</string>
+    <string name="contact_less_invite_content">Hey, I\'m using Mixin Messenger to chat. Download it here: https://mixin.one/messenger .</string>
+    <string name="contact_mute_title">Mute notifications for…</string>
+    <string name="contact_mute_8hours">8 Hours</string>
+    <string name="contact_mute_1week">1 Week</string>
+    <string name="contact_mute_1year">1 Year</string>
+    <!--contacts-->
+    <string name="contact_new_group_chat_title">New Group Chat</string>
+    <string name="contact_new_group_chat_desc">Create a group chat with up to  friends</string>
+    <string name="contact_add_contact_title">Add Contact</string>
+    <string name="contact_add_contact_desc">Add people by Mixin ID or phone number</string>
+    <string name="contact_qr_mixin">Mixin QR Code</string>
+    <string name="contact_qr_desc">Scan a friend\'s Mixin QR code</string>
+    <string name="contact_invite_title">Invite People</string>
+    <string name="contact_invite_desc">My invitation code is %1$s</string>
+    <string name="contact_mixin_id" translatable="false">Mixin ID: %1$s</string>
+    <string name="contact_mobile">Mobile: %1$s</string>
+    <string name="contact_empty">Phone Contacts</string>
+    <string name="contact_empty_tip">Mixin needs access your contacts to help you connect with other people on Mixin.</string>
+    <string name="contact_item_title">CONTACTS</string>
+    <string name="contact_sq_scan_title">Extract QR Code</string>
+    <string name="contact_save_image">Save Image</string>
+    <string name="contact_my_qr_title">My QR Code</string>
+    <string name="contact_my_qr_tip">Scan the QR code to add me on Mixin</string>
+    <string name="contact_receive_money">Receive Money</string>
+    <string name="contact_receive_tip">Scan the QR Code to pay me</string>
+    <!--profile-->
+    <string name="profile_my_title">My Profile</string>
+    <string name="profile_photo">Profile Photo</string>
+    <string name="profile_phone">Change Number</string>
+    <string name="profile_invitation">My Invitation Code</string>
+    <string name="profile_invitation_tip">You have invited total %1$d people</string>
+    <string name="profile_modify_name">Modify Name</string>
+    <string name="profile_modify_name_hint">Please input name</string>
+    <string name="profile_modify_number">Do you want to change your phone number?</string>
+    <string name="info">Messages to this conversation are encrypted end-to-end, tap for more info.</string>
+    <string name="verify_pin">Verify PIN</string>
+    <string name="edit_name">Edit Name</string>
     <string name="change_phone_success">Change phone number successfully!</string>
+    <string name="get_free_redeem">Invite Code</string>
+    <string name="get_free_redeem_tip">Enter your Invite Code.</string>
+    <!--Add people-->
+    <string name="add_people_title">Add People</string>
+    <string name="add_people_search_hint">Fone ID or Phone number</string>
+    <string name="add_people_tip">My Fone ID: %1$s</string>
 
 </resources>

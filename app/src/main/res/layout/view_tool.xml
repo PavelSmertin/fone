@@ -11,7 +11,7 @@
         android:layout_centerVertical="true"
         android:background="@drawable/mixin_ripple"
         android:padding="16dp"
-        android:src="@drawable/ic_close_black_24dp"
+        android:src="@drawable/ic_close_24dp"
         tools:ignore="ContentDescription"/>
 
     <ImageView
@@ -44,7 +44,7 @@
         android:layout_toStartOf="@id/copy_iv"
         android:background="@drawable/mixin_ripple"
         android:padding="16dp"
-        android:src="@drawable/ic_forward_black_24dp"
+        android:src="@drawable/ic_forward_24dp"
         tools:ignore="ContentDescription"/>
 
     <ImageView

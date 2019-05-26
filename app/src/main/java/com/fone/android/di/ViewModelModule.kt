@@ -2,6 +2,7 @@ package com.fone.android.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.fone.android.ui.contacts.ContactViewModel
 import com.fone.android.ui.conversation.ConversationViewModel
 import com.fone.android.ui.home.ConversationListViewModel
 import com.fone.android.ui.landing.MobileViewModel
@@ -13,6 +14,11 @@ import dagger.multibindings.IntoMap
 
 @Module
 internal abstract class ViewModelModule {
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ContactViewModel::class)
+    internal abstract fun bindContactViewModel(contactViewModel: ContactViewModel): ViewModel
 
     @Binds
     @IntoMap

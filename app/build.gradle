@@ -140,7 +140,10 @@ dependencies {
     kapt "com.github.bumptech.glide:compiler:$glideVersion"
     implementation "jp.wasabeef:glide-transformations:${glideTransformationsVersion}"
     implementation("io.jsonwebtoken:jjwt:${jwtVersion}")
-
+    implementation "com.github.tougee:rx-contacts2:${rxContactsVersion}"
+    implementation("com.github.yalantis:ucrop:${ucropVersion}") {
+        exclude group: 'com.squareup.okhttp3', module: 'okhttp'
+    }
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.0'

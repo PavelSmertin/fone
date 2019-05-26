@@ -1,8 +1,10 @@
 package com.fone.android.di
 
 
+import com.fone.android.di.module.ContactActivityModule
 import com.fone.android.di.module.InitializeActivityModule
 import com.fone.android.di.module.LandingActivityModule
+import com.fone.android.ui.contacts.ContactsActivity
 import com.fone.android.ui.conversation.ConversationActivity
 import com.fone.android.ui.home.MainActivity
 import com.fone.android.ui.landing.InitializeActivity
@@ -27,4 +29,7 @@ abstract class ActivityModule {
 
     @ContributesAndroidInjector(modules = [(InitializeActivityModule::class)])
     internal abstract fun contributeSetupName(): InitializeActivity
+
+    @ContributesAndroidInjector(modules = [(CommonModule::class), (ContactActivityModule::class)])
+    internal abstract fun contributeContacts(): ContactsActivity
 }
