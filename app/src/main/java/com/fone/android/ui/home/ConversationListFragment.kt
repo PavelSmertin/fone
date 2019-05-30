@@ -109,16 +109,16 @@ class ConversationListFragment : LinkFragment() {
             }
         }
         messagesViewModel.conversations.observe(this, Observer { r ->
-//            if (r == null || r.isEmpty()) {
-//                empty_view.visibility = VISIBLE
-//            } else {
+            if (r == null || r.isEmpty()) {
+                empty_view.visibility = VISIBLE
+            } else {
                 empty_view.visibility = GONE
                 messageAdapter.setConversationList(r)
 //                r.filter { it.isGroup() && (it.iconUrl() == null || !File(it.iconUrl()).exists()) }
 //                    .forEach {
 //                        jobManager.addJobInBackground(GenerateAvatarJob(it.conversationId))
 //                    }
-//            }
+            }
         })
 
         start_bn.setOnClickListener {
@@ -415,9 +415,9 @@ class ConversationListFragment : LinkFragment() {
                 }
             }
 
-            itemView.bot_iv.visibility = if (conversationItem.isBot()) VISIBLE else GONE
+            //itemView.bot_iv.visibility = if (conversationItem.isBot()) VISIBLE else GONE
             itemView.mute_iv.visibility = if (conversationItem.isMute()) VISIBLE else GONE
-            itemView.verified_iv.visibility = if (conversationItem.ownerVerified == true) VISIBLE else GONE
+            //itemView.verified_iv.visibility = if (conversationItem.ownerVerified == true) VISIBLE else GONE
 
             if (conversationItem.isGroup()) {
                 itemView.avatar_iv.setGroup(conversationItem.iconUrl())

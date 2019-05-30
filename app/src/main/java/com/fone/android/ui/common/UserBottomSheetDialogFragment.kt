@@ -5,10 +5,13 @@ import android.app.Dialog
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import android.view.View
+import android.widget.LinearLayout
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.updateLayoutParams
 import androidx.lifecycle.Observer
 import com.fone.android.Constants.ARGS_USER
 import com.fone.android.R
+import com.fone.android.api.request.RelationshipAction
 import com.fone.android.extension.addFragment
 import com.fone.android.extension.notNullElse
 import com.fone.android.ui.contacts.ProfileFragment
@@ -62,14 +65,14 @@ class UserBottomSheetDialogFragment : FoneBottomSheetDialogFragment() {
         user = arguments!!.getParcelable(ARGS_USER)!!
         conversationId = arguments!!.getString(ARGS_CONVERSATION_ID)
         contentView.left_iv.setOnClickListener { dismiss() }
-//        contentView.avatar.setOnClickListener {
-//            user.avatarUrl.let { url ->
-//                if (!url.isNullOrBlank()) {
-//                    AvatarActivity.show(requireActivity(), url, contentView.avatar)
-//                    dismiss()
-//                }
-//            }
-//        }
+        contentView.avatar.setOnClickListener {
+            user.avatarUrl.let { url ->
+                if (!url.isNullOrBlank()) {
+                    //AvatarActivity.show(requireActivity(), url, contentView.avatar)
+                    dismiss()
+                }
+            }
+        }
 
         bottomViewModel.findUserById(user.userId).observe(this, Observer { u ->
             if (u == null) return@Observer
@@ -81,11 +84,11 @@ class UserBottomSheetDialogFragment : FoneBottomSheetDialogFragment() {
             }
             user = u
             updateUserInfo(u)
-            initMenu()
+            //initMenu()
         })
-//        contentView.add_fl.setOnClickListener {
-//            updateRelationship(UserRelationship.FRIEND.name)
-//        }
+        contentView.add_fl.setOnClickListener {
+            updateRelationship(UserRelationship.FRIEND.name)
+        }
         contentView.send_fl.setOnClickListener {
             context?.let { ctx -> ConversationActivity.show(ctx, null, user.userId) }
             dismiss()
@@ -178,7 +181,43 @@ class UserBottomSheetDialogFragment : FoneBottomSheetDialogFragment() {
         contentView.detail_tv.visibility = View.GONE
         contentView.open_fl.visibility = View.GONE
 
+        updateUserStatus(user.relationship)
+
     }
 
+    private fun updateRelationship(relationship: String) {
+        updateUserStatus(relationship)
+        bottomViewModel.updateRelationship(user, RelationshipAction.ADD.name)
+    }
+
+    private fun updateUserStatus(relationship: String) {
+        when (relationship) {
+            UserRelationship.BLOCKING.name -> {
+                contentView.send_fl.visibility = View.GONE
+                contentView.add_fl.visibility = View.GONE
+                contentView.unblock_fl.visibility = View.VISIBLE
+                contentView.unblock_fl.setOnClickListener {
+                    bottomViewModel.updateRelationship(user, RelationshipAction.UNBLOCK.name)
+                    dismiss()
+                }
+            }
+            UserRelationship.FRIEND.name -> {
+                contentView.add_fl.visibility = View.GONE
+                contentView.send_fl.visibility = View.VISIBLE
+                contentView.send_fl.updateLayoutParams<LinearLayout.LayoutParams> {
+                    topMargin = resources.getDimensionPixelOffset(R.dimen.activity_vertical_margin)
+                }
+                contentView.unblock_fl.visibility = View.GONE
+            }
+            UserRelationship.STRANGER.name -> {
+                contentView.add_fl.visibility = View.VISIBLE
+                contentView.send_fl.visibility = View.VISIBLE
+                contentView.add_fl.updateLayoutParams<LinearLayout.LayoutParams> {
+                    topMargin = resources.getDimensionPixelOffset(R.dimen.activity_vertical_margin)
+                }
+                contentView.unblock_fl.visibility = View.GONE
+            }
+        }
+    }
 
 }

@@ -11,14 +11,14 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.fone.android.R
-import com.fone.android.extension.addFragment
-import com.fone.android.extension.toast
 import com.fone.android.extension.vibrate
 import com.fone.android.ui.common.BaseFragment
 import com.fone.android.ui.common.UserBottomSheetDialogFragment
 import com.fone.android.ui.landing.MobileFragment
 import com.fone.android.util.ErrorHandler
 import com.fone.android.util.Session
+import com.fone.android.vo.User
+import com.fone.android.vo.UserRelationship
 import com.fone.android.widget.Keyboard
 import com.google.i18n.phonenumbers.NumberParseException
 import com.google.i18n.phonenumbers.PhoneNumberUtil
@@ -77,18 +77,24 @@ class AddPeopleFragment : BaseFragment() {
                 search_animator.displayedChild = POS_SEARCH
                 search_tv.isEnabled = true
                 when {
-                    r.isSuccess -> r.data?.let { data ->
-                        if (data.userId == Session.getAccountId()) {
-                            activity?.addFragment(this@AddPeopleFragment,
-                                ProfileFragment.newInstance(), ProfileFragment.TAG
-                            )
-                        } else {
-                            contactsViewModel.insertUser(user = data)
-                            UserBottomSheetDialogFragment.newInstance(data).showNow(requireFragmentManager(), UserBottomSheetDialogFragment.TAG)
-                        }
+                    true -> r?.let { data ->
+                        val user = User(
+                             "999",
+                             "",
+                              UserRelationship.FRIEND.name,
+                             "druk",
+                             "https://placeimg.com/140/141/any",
+                             "482151",
+                             null,
+                             null,
+                             null,
+                             null,
+                             null
+                        )
+                        contactsViewModel.insertUser(user = user)
+                        UserBottomSheetDialogFragment.newInstance(user).showNow(requireFragmentManager(), UserBottomSheetDialogFragment.TAG)
                     }
-                    r.errorCode == ErrorHandler.NOT_FOUND -> context?.toast(R.string.error_user_not_found)
-                    else -> ErrorHandler.handleMixinError(r.errorCode)
+                    else -> ErrorHandler.handleMixinError(500)
                 }
             }, { t: Throwable ->
                 search_animator.displayedChild = POS_SEARCH

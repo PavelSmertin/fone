@@ -34,7 +34,7 @@ interface ConversationService {
 
 
     @POST("conversations")
-    fun create(@Body request: ConversationRequest): Call<FoneResponse<ConversationResponse>>
+    fun create(@Body request: ConversationRequest): Call<ConversationResponse>
 
     @GET("conversations/{id}/messages")
     fun getConversation(@Path("id") id: String): Call<FoneResponse<ConversationResponse>>

@@ -19,7 +19,7 @@
             android:layout_marginTop="8dp"
             android:padding="8dp"
             android:background="@drawable/mixin_ripple"
-            android:src="@drawable/ic_close_24dp"
+            android:src="@drawable/ic_close_black_24dp"
             tools:ignore="ContentDescription"/>
 
         <ImageView
@@ -31,7 +31,7 @@
             android:layout_marginTop="8dp"
             android:padding="8dp"
             android:background="@drawable/mixin_ripple"
-            android:src="@drawable/ic_more"
+            android:src="@drawable/ic_more_black"
             tools:ignore="ContentDescription"/>
 
         <com.fone.android.widget.AvatarView
@@ -70,7 +70,6 @@
             android:layout_centerVertical="true"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:src="@drawable/ic_bot"
             android:visibility="gone"
             tools:ignore="ContentDescription"/>
 
@@ -83,7 +82,6 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:visibility="gone"
-            android:src="@drawable/ic_user_verified"
             tools:ignore="ContentDescription"/>
     </RelativeLayout>
 

@@ -19,7 +19,7 @@
     <string name="state_syncing">Syncing messages</string>
     <string name="state_calling">Tap to return to call</string>
 
-    <string name="empty_info">You can chat with contacts who have\Fone install on their phone</string>
+    <string name="empty_info">You can chat with contacts who have Fone\n install on their phone</string>
     <string name="empty_start">Start Messaging</string>
 
     <string name="group_wait">Please wait a moment</string>

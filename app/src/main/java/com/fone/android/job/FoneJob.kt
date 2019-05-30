@@ -5,9 +5,11 @@ import com.birbit.android.jobqueue.Params
 import com.fone.android.Constants
 import com.fone.android.api.NetworkException
 import com.fone.android.api.WebSocketException
+import com.fone.android.api.request.ConversationRequest
 import com.fone.android.util.ErrorHandler
 import com.fone.android.util.Session
 import com.fone.android.vo.Conversation
+import com.fone.android.vo.ConversationStatus
 import com.fone.android.vo.MessageStatus
 import com.fone.android.vo.createAckJob
 import com.fone.android.websocket.BlazeAckMessage
@@ -76,18 +78,16 @@ abstract class FoneJob(params: Params, val jobId: String) : BaseJob(params) {
     }
 
     protected fun requestCreateConversation(conversation: Conversation) {
-//        if (conversation.status != ConversationStatus.SUCCESS.ordinal) {
-//            val participantRequest = arrayListOf(ParticipantRequest(conversation.ownerId!!, ""))
-//            val request = ConversationRequest(conversationId = conversation.conversationId,
-//                category = conversation.category, participants = participantRequest)
-//            val response = conversationApi.create(request).execute().body()
-//            if (response != null && response.isSuccess && response.data != null && !isCancel) {
-//                conversationDao
-//                    .updateConversationStatusById(conversation.conversationId, ConversationStatus.SUCCESS.ordinal)
-//            } else {
-//                throw Exception("Create Conversation Exception")
-//            }
-//        }
+        if (conversation.status != ConversationStatus.SUCCESS.ordinal) {
+            val request = ConversationRequest(username = "user")
+            val response = conversationApi.create(request).execute().body()
+            if (response != null && !isCancel) {
+                conversationDao
+                    .updateConversationStatusById(response.conversationId, ConversationStatus.SUCCESS.ordinal)
+            } else {
+                throw Exception("Create Conversation Exception")
+            }
+        }
     }
 
     internal abstract fun cancel()

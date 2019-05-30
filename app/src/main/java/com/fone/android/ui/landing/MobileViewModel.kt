@@ -9,11 +9,11 @@ import com.fone.android.api.request.AccountUpdateRequest
 import com.fone.android.api.request.VerificationRequest
 import com.fone.android.api.response.VerificationResponse
 import com.fone.android.extension.defaultSharedPreferences
-import com.fone.android.extension.nowInUtc
 import com.fone.android.repository.AccountRepository
 import com.fone.android.repository.ConversationRepository
 import com.fone.android.repository.UserRepository
-import com.fone.android.vo.*
+import com.fone.android.vo.Account
+import com.fone.android.vo.User
 import com.fone.android.vo.model.ResponseRegister
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -26,26 +26,6 @@ constructor(
     private val userRepository: UserRepository,
     private val messageRepository: ConversationRepository
 ) : ViewModel() {
-
-    fun initialConversation() {
-        var conversation = Conversation(
-            "1",
-            "1",
-            ConversationCategory.CONTACT.name,
-            "Давай поговорим",
-            "https://placeimg.com/140/140/any",
-            null,
-            null,
-            "",
-            nowInUtc(),
-            null,
-            null,
-            null,
-            0,
-            ConversationStatus.SUCCESS.ordinal,
-            null)
-        messageRepository.insertConversation(conversation, mutableListOf<Participant>())
-    }
 
     fun loginVerification(request: VerificationRequest): Observable<FoneResponse<VerificationResponse>> =
         Observable.just(request).flatMap {

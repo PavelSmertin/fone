@@ -5,10 +5,7 @@ import com.fone.android.api.request.RelationshipRequest
 import com.fone.android.vo.User
 import io.reactivex.Observable
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface UserService {
 
@@ -18,8 +15,8 @@ interface UserService {
     @GET("users/{id}")
     fun getUserById(@Path("id") id: String): Call<FoneResponse<User>>
 
-    @GET("search/{query}")
-    fun search(@Path("query") query: String): Observable<FoneResponse<User>>
+    @GET("numbers")
+    fun search(@Query("search") search: String): Observable<ArrayList<String>>
 
     @POST("relationships")
     fun relationship(@Body request: RelationshipRequest): Observable<FoneResponse<User>>

@@ -5,6 +5,7 @@ import com.birbit.android.jobqueue.Job
 import com.birbit.android.jobqueue.Params
 import com.birbit.android.jobqueue.RetryConstraint
 import com.fone.android.api.*
+import com.fone.android.api.service.ConversationService
 import com.fone.android.api.service.MessageService
 import com.fone.android.db.*
 import com.fone.android.di.AppComponent
@@ -21,6 +22,10 @@ abstract class BaseJob(params: Params) : Job(params), Injectable {
     @Inject
     @Transient
     lateinit var jobManager: FoneJobManager
+
+    @Inject
+    @Transient
+    lateinit var conversationApi: ConversationService
 
     @Transient
     @Inject

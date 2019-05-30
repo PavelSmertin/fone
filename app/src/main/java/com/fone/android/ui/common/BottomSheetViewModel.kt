@@ -3,6 +3,7 @@ package com.fone.android.ui.common
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.fone.android.api.FoneResponse
+import com.fone.android.api.request.RelationshipRequest
 import com.fone.android.api.response.ConversationResponse
 import com.fone.android.repository.AccountRepository
 import com.fone.android.repository.UserRepository
@@ -22,6 +23,9 @@ class BottomSheetViewModel @Inject internal constructor(
 
     fun findUserById(id: String): LiveData<User> = userRepository.findUserById(id)
 
-
+    fun updateRelationship(u: User, request: String) {
+        userRepository.updateUserRelationship(RelationshipRequest(u.userId, request))
+        userRepository.upsert(u)
+    }
 
 }

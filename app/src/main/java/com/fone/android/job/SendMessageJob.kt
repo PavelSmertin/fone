@@ -2,9 +2,6 @@ package com.fone.android.job
 
 import com.birbit.android.jobqueue.Params
 import com.fone.android.vo.Message
-import com.fone.android.websocket.BlazeMessageParam
-import com.fone.android.websocket.createParamBlazeMessage
-
 
 open class SendMessageJob(
     val message: Message,
@@ -48,17 +45,11 @@ open class SendMessageJob(
     private fun sendPlainMessage() {
         val conversation = conversationDao.getConversation(message.conversationId) ?: return
         requestCreateConversation(conversation)
-        var content = message.content
-//        if (message.category == MessageCategory.PLAIN_TEXT.name) {
-//            if (message.content != null) {
-//                content = Base64.encodeBytes(message.content!!.toByteArray())
-//            }
-//        }
-        val blazeParam = BlazeMessageParam(message.conversationId, recipientId,
-            message.id, message.category, content, quote_message_id = message.quoteMessageId)
-        val blazeMessage = createParamBlazeMessage(blazeParam)
-
-        deliver(blazeMessage)
+//        var content = message.content
+//        val blazeParam = BlazeMessageParam(message.conversationId, recipientId,
+//            message.id, message.category, content, quote_message_id = message.quoteMessageId)
+//        val blazeMessage = createParamBlazeMessage(blazeParam)
+//        deliver(blazeMessage)
     }
 
 }

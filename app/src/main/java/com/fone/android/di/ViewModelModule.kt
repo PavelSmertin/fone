@@ -2,6 +2,7 @@ package com.fone.android.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.fone.android.ui.common.BottomSheetViewModel
 import com.fone.android.ui.contacts.ContactViewModel
 import com.fone.android.ui.conversation.ConversationViewModel
 import com.fone.android.ui.home.ConversationListViewModel
@@ -35,6 +36,10 @@ internal abstract class ViewModelModule {
     @ViewModelKey(MobileViewModel::class)
     internal abstract fun bindMobileViewModel(mobileViewModel: MobileViewModel): ViewModel
 
+    @Binds
+    @IntoMap
+    @ViewModelKey(BottomSheetViewModel::class)
+    internal abstract fun bindBottomSheetViewModel(bottomSheetViewModel: BottomSheetViewModel): ViewModel
 
     @Binds
     internal abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory

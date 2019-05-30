@@ -2,7 +2,6 @@ package com.fone.android.ui.home
 
 
 import androidx.lifecycle.ViewModel
-import com.fone.android.api.request.ConversationRequest
 import com.fone.android.api.request.ParticipantRequest
 import com.fone.android.extension.nowInUtc
 import com.fone.android.repository.ConversationRepository
@@ -36,8 +35,8 @@ internal constructor(
 
             val participantRequestList = mutableListOf<ParticipantRequest>()
             mutableList.mapTo(participantRequestList) { ParticipantRequest(it.userId, it.role) }
-            val request = ConversationRequest(conversationId, it.category!!, it.name, it.iconUrl,
-                it.announcement, participantRequestList)
+            //val request = ConversationRequest(conversationId, it.category!!, it.name, it.iconUrl,
+            //    it.announcement, participantRequestList)
             //jobManager.addJobInBackground(ConversationJob(request, type = TYPE_CREATE))
         }
     }

@@ -31,7 +31,7 @@ internal constructor(
         userRepository.upsert(user)
     }
 
-    fun search(query: String): Observable<FoneResponse<User>> =
+    fun search(query: String): Observable<ArrayList<String>> =
         accountRepository.search(query).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
 

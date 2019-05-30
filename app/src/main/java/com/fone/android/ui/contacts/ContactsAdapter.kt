@@ -2,8 +2,6 @@ package com.fone.android.ui.contacts
 
 import android.content.Context
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.fone.android.R
@@ -211,8 +209,8 @@ class ContactsAdapter(val context: Context, var users: List<User>, var friendSiz
         fun bind(user: User, listener: ContactListener?) {
             itemView.normal.text = user.fullName
             itemView.avatar.setInfo(user.fullName, user.avatarUrl, user.userId)
-            itemView.bot_iv.visibility = if (user.appId != null) VISIBLE else GONE
-            itemView.verified_iv.visibility = if (user.isVerified != null && user.isVerified) VISIBLE else GONE
+//            itemView.bot_iv.visibility = if (user.appId != null) VISIBLE else GONE
+//            itemView.verified_iv.visibility = if (user.isVerified != null && user.isVerified) VISIBLE else GONE
             if (listener != null) {
                 itemView.setOnClickListener { listener.onFriendItem(user) }
             }

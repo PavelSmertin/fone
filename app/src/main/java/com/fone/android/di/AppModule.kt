@@ -71,11 +71,11 @@ internal class AppModule {
         builder.retryOnConnectionFailure(false)
         builder.sessionProvider(object : SessionProvider {
             override fun getSession(request: Request): String {
-                return "Authorization: Bearer ${Session.signToken(Session.getAccount(), request)}"
+                return "Authorization: Bearer ${Session.getToken()}"
             }
 
             override fun getSessionHeader(request: Request): Header {
-                return Header("Authorization", "Bearer ${Session.signToken(Session.getAccount(), request)}")
+                return Header("Authorization", "Bearer ${Session.getToken()}")
             }
         })
 

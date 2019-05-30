@@ -98,7 +98,7 @@ class VerificationFragment : BaseFragment() {
         showLoading()
 
         val accountRequest = AccountRequest(
-            "у девочки нет имени",
+            "guba001",
             arguments!!.getLong(ARGS_PHONE_NUM)
         )
 
@@ -122,7 +122,7 @@ class VerificationFragment : BaseFragment() {
                     "default",
                     "0000-0000-0000-0000",
                     "-1",
-                    "Твой батя",
+                    "Я",
                     "https://placeimg.com/140/140/any",
                     "123",
                     null,
@@ -144,7 +144,6 @@ class VerificationFragment : BaseFragment() {
                 FoneApplication.get().onlining.set(true)
                 defaultSharedPreferences.putBoolean(Constants.Account.PREF_SET_NAME, true)
                 mobileViewModel.insertUser(account.toUser())
-                mobileViewModel.initialConversation()
 
                 InitializeActivity.showSetupName(context!!)
                 activity?.finish()
