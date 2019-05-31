@@ -8,6 +8,7 @@ import com.fone.android.repository.AccountRepository
 import com.fone.android.repository.UserRepository
 import com.fone.android.vo.Account
 import com.fone.android.vo.User
+import com.fone.android.vo.model.ResponseUser
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -31,7 +32,7 @@ internal constructor(
         userRepository.upsert(user)
     }
 
-    fun search(query: String): Observable<ArrayList<String>> =
+    fun search(query: String): Observable<ResponseUser> =
         accountRepository.search(query).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
 

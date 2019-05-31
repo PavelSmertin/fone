@@ -11,6 +11,7 @@ import com.fone.android.api.service.ConversationService
 import com.fone.android.api.service.UserService
 import com.fone.android.vo.Account
 import com.fone.android.vo.model.ResponseRegister
+import com.fone.android.vo.model.ResponseUser
 import io.reactivex.Observable
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -41,7 +42,7 @@ class AccountRepository
         return conversationService.join(conversationId)
     }
 
-    fun search(query: String): Observable<ArrayList<String>> =
+    fun search(query: String): Observable<ResponseUser> =
         userService.search(query)
 
 }

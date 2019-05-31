@@ -79,12 +79,12 @@ class AddPeopleFragment : BaseFragment() {
                 when {
                     true -> r?.let { data ->
                         val user = User(
-                             "999",
+                            data.id,
                              "",
                               UserRelationship.FRIEND.name,
-                             "druk",
+                            data.username+"_"+data.number.toString(),
                              "https://placeimg.com/140/141/any",
-                             "482151",
+                             data.number.toString(),
                              null,
                              null,
                              null,
