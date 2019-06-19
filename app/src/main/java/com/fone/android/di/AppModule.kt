@@ -23,7 +23,7 @@ import com.fone.android.job.MyJobService
 import com.fone.android.util.LiveDataCallAdapterFactory
 import com.fone.android.util.Session
 import com.fone.android.vo.LinkState
-import com.fone.android.websocket.ChatWebSocket
+import com.fone.android.websocket.ChatWebSocketSSE
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides
@@ -206,7 +206,7 @@ internal class AppModule {
         jobManager: FoneJobManager,
         linkState: LinkState,
         jobDao: JobDao
-    ): ChatWebSocket =
-        ChatWebSocket(okHttp, app, conversationDao, messageDao, offsetDao, floodMessageDao, jobManager, linkState, jobDao)
+    ): ChatWebSocketSSE =
+        ChatWebSocketSSE(app, conversationDao, messageDao, offsetDao, floodMessageDao, jobManager, jobDao)
 
 }

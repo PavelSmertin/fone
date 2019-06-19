@@ -40,6 +40,7 @@ buildscript {
         ext.libphonenumberVersion = '8.10.2'
         ext.rxContactsVersion = '1.1'
         ext.ucropVersion = '2.2.1'
+        ext.eventSourceVersion='1.2.11'
 
         ext.pagingVersion = '2.1.0'
 

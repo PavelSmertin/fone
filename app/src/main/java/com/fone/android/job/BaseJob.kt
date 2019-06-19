@@ -12,8 +12,7 @@ import com.fone.android.di.AppComponent
 import com.fone.android.di.Injectable
 import com.fone.android.di.type.DatabaseCategory
 import com.fone.android.di.type.DatabaseCategoryEnum
-import com.fone.android.websocket.ChatWebSocket
-
+import com.fone.android.websocket.ChatWebSocketSSE
 import java.net.SocketTimeoutException
 import javax.inject.Inject
 
@@ -38,7 +37,7 @@ abstract class BaseJob(params: Params) : Job(params), Injectable {
 
     @Inject
     @Transient
-    lateinit var chatWebSocket: ChatWebSocket
+    lateinit var chatWebSocket: ChatWebSocketSSE
 
     @Inject
     @Transient

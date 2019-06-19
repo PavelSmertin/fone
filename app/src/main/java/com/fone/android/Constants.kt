@@ -5,6 +5,7 @@ object Constants {
     object API {
         const val DOMAIN = "https://fone.one"
         const val URL = "https://fone-238313.appspot.com/api/"
+        const val SSE_URL = "https://fone-238313.appspot.com/api/messages"
         const val WS_URL = "wss://blaze.fone.one"
 
         const val GIPHY_URL = "http://api.giphy.com/v1/"

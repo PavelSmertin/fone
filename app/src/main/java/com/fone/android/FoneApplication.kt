@@ -10,8 +10,13 @@ import android.webkit.WebStorage
 import com.fone.android.db.FoneDatabase
 import com.fone.android.di.AppComponent
 import com.fone.android.di.AppInjector
+import com.fone.android.extension.clear
 import com.fone.android.extension.defaultSharedPreferences
 import com.fone.android.extension.putBoolean
+import com.fone.android.job.BlazeMessageService
+import com.fone.android.job.FoneJobManager
+import com.fone.android.ui.landing.LandingActivity
+import com.fone.android.util.Session
 import com.jakewharton.threetenabp.AndroidThreeTen
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
@@ -34,8 +39,8 @@ class FoneApplication : Application(), HasActivityInjector, HasServiceInjector {
 //    @Inject
 //    lateinit var mixinWorkerFactory: MixinWorkerFactory
 //
-//    @Inject
-//    lateinit var jobManager: FoneJobManager
+    @Inject
+    lateinit var jobManager: FoneJobManager
 
     lateinit var appComponent: AppComponent
 
@@ -80,12 +85,12 @@ class FoneApplication : Application(), HasActivityInjector, HasServiceInjector {
 
     fun closeAndClear(toLanding: Boolean = true) {
         if (onlining.compareAndSet(true, false)) {
-//            BlazeMessageService.stopService(this)
+            BlazeMessageService.stopService(this)
 //            CallService.disconnect(this)
             notificationManager.cancelAll()
-//            Session.clearAccount()
-//            defaultSharedPreferences.clear()
-//            defaultSharedPreferences.putBoolean(Constants.Account.PREF_LOGOUT_COMPLETE, false)
+            Session.clearAccount()
+            defaultSharedPreferences.clear()
+            defaultSharedPreferences.putBoolean(Constants.Account.PREF_LOGOUT_COMPLETE, false)
             CookieManager.getInstance().removeAllCookies(null)
             CookieManager.getInstance().flush()
             WebStorage.getInstance().deleteAllData()
@@ -95,7 +100,7 @@ class FoneApplication : Application(), HasActivityInjector, HasServiceInjector {
 
                     uiThread {
                         inject()
-//                        LandingActivity.show(this@FoneApplication)
+                        LandingActivity.show(this@FoneApplication)
                     }
                 }
             } else {
@@ -106,14 +111,15 @@ class FoneApplication : Application(), HasActivityInjector, HasServiceInjector {
     }
 
     fun clearData() {
-//        jobManager.cancelAllJob()
-//        jobManager.clear()
+        jobManager.cancelAllJob()
+        jobManager.clear()
         FoneDatabase.getDatabase(this).clearAllTables()
         defaultSharedPreferences.putBoolean(Constants.Account.PREF_LOGOUT_COMPLETE, true)
     }
 
     fun gotoTimeWrong(serverTime: Long) {
         if (onlining.compareAndSet(true, false)) {
+            BlazeMessageService.stopService(this)
             notificationManager.cancelAll()
             defaultSharedPreferences.putBoolean(Constants.Account.PREF_WRONG_TIME, true)
         }

@@ -203,4 +203,8 @@
     <string name="add_people_search_hint">Fone ID or Phone number</string>
     <string name="add_people_tip">My Fone ID: %1$s</string>
 
+    <string name="background_connection_enabled">Messaging node running</string>
+    <string name="exit">Exit</string>
+    <string name="notification_node">Messaging Node</string>
+
 </resources>
